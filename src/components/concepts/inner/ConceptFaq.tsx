@@ -18,7 +18,7 @@ export function ConceptFaq({ items }: { items: Faq[] }) {
             </span>
           </summary>
           <div className="pb-8 pr-16">
-            {item.review === "placeholder" ? (
+            {item.placeholder ? (
               <ConceptPlaceholder>{item.answer}</ConceptPlaceholder>
             ) : (
               <p className="max-w-[62ch] text-lg">{item.answer}</p>

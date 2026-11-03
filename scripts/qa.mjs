@@ -9,8 +9,8 @@ import { AxeBuilder } from "@axe-core/playwright";
 const root = path.resolve(import.meta.dirname, "..");
 const BASE = process.env.QA_BASE_URL ?? "http://localhost:4173";
 const PAGES = ["/", "/dodd-agency-provider/", "/health-care-consultant/", "/careers/", "/about-us/", "/contact-us/"];
-// Baseline site plus the three design concepts (/a/, /b/, /c/).
-const SITE_ROUTES = [...PAGES, ...["a", "d"].flatMap((c) => PAGES.map((p) => (p === "/" ? `/${c}/` : `/${c}${p}`)))];
+// Design chooser at the root plus every page of the two designs (/a/, /d/).
+const SITE_ROUTES = ["/", ...["a", "d"].flatMap((c) => PAGES.map((p) => (p === "/" ? `/${c}/` : `/${c}${p}`)))];
 const ROUTES = [...SITE_ROUTES, "/missing-page/"];
 const HIDDEN_CHECK = "[data-reveal], [data-reveal-item], [data-word]";
 const isHidden = (el) => {
@@ -100,7 +100,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
     await page.close();
   }
   const page = await context.newPage();
-  for (const route of ["/", "/a/", "/d/"]) {
+  for (const route of ["/a/", "/d/"]) {
     await page.goto(BASE + route);
     await page.locator("header summary", { hasText: "Menu" }).click();
     if (!(await page.locator("header details[open] nav[aria-label='Primary'] a", { hasText: "Careers" }).isVisible())) {
@@ -108,7 +108,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
     }
   }
   for (const [route, fill] of [
-    ["/careers/", async (p) => {
+    ["/a/careers/", async (p) => {
       await p.fill("#fullName", "Test Person");
       await p.fill("#email", "test@example.com");
       await p.fill("#phone", "216 555 0123");
@@ -116,7 +116,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
       await p.check("#consent");
       await p.check("#acknowledge");
     }],
-    ["/contact-us/", async (p) => {
+    ["/a/contact-us/", async (p) => {
       await p.fill("#name", "Test Person");
       await p.fill("#email", "test@example.com");
       await p.fill("#message", "Hello");
@@ -161,7 +161,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
 // 4. Keyboard: skip link, focus visibility, mobile menu, FAQ, forms with JS.
 {
   const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
-  const { page } = await openPage(desktop, "/", consoleErrors);
+  const { page } = await openPage(desktop, "/a/", consoleErrors);
   await page.keyboard.press("Tab");
   const first = await page.evaluate(() => ({
     text: document.activeElement?.textContent?.trim(),
@@ -176,7 +176,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
   const afterSkip = await page.evaluate(() => document.activeElement?.closest("main") !== null);
   if (!afterSkip) fail("keyboard: skip link does not move focus into main");
 
-  await page.goto(BASE + "/");
+  await page.goto(BASE + "/a/");
   const outlines = [];
   for (let i = 0; i < 12; i++) {
     await page.keyboard.press("Tab");
@@ -193,7 +193,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
   await desktop.close();
 
   const mobile = await browser.newContext({ viewport: { width: 375, height: 800 }, reducedMotion: "reduce" });
-  const m = (await openPage(mobile, "/dodd-agency-provider/", consoleErrors)).page;
+  const m = (await openPage(mobile, "/a/dodd-agency-provider/", consoleErrors)).page;
   await m.locator("summary", { hasText: "Menu" }).focus();
   await m.keyboard.press("Enter");
   if (!(await m.locator("header details").evaluate((d) => d.open))) fail("keyboard: Enter does not open the mobile menu");
@@ -213,7 +213,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
     );
     if (!opened || !closedAgain) fail(`keyboard ${route}: concept menu open=${opened} closed=${closedAgain}`);
   }
-  await m.goto(BASE + "/dodd-agency-provider/", { waitUntil: "networkidle" });
+  await m.goto(BASE + "/a/dodd-agency-provider/", { waitUntil: "networkidle" });
 
   const faq = m.locator("main details summary").first();
   await faq.focus();
@@ -221,7 +221,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
   if (!(await m.locator("main details").first().evaluate((d) => d.open))) fail("keyboard: FAQ does not open with Enter");
 
   // Careers form with JS: empty submit shows a focused summary; valid submit shows the preview status.
-  await m.goto(BASE + "/careers/", { waitUntil: "networkidle" });
+  await m.goto(BASE + "/a/careers/", { waitUntil: "networkidle" });
   await m.locator("form button[type=submit]").click();
   await m.waitForTimeout(200);
   const summary = await m.evaluate(() => {
@@ -246,9 +246,9 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
   await m.waitForTimeout(200);
   const status = await m.locator("[role=status]").innerText();
   if (!/nothing was sent/i.test(status)) fail(`forms: careers preview status missing (got "${status}")`);
-  if (m.url() !== BASE + "/careers/") fail(`forms: careers submit changed URL to ${m.url()}`);
+  if (m.url() !== BASE + "/a/careers/") fail(`forms: careers submit changed URL to ${m.url()}`);
 
-  await m.goto(BASE + "/contact-us/?service=health-care-consultant", { waitUntil: "networkidle" });
+  await m.goto(BASE + "/d/contact-us/?service=health-care-consultant", { waitUntil: "networkidle" });
   if ((await m.locator("#topic").inputValue()) !== "health-care-consultant") fail("forms: contact topic not preselected from ?service=");
   await mobile.close();
 

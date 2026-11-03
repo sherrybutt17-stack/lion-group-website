@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Lato, Poly, Space_Grotesk } from "next/font/google";
-import { DesignSwitcher } from "@/components/DesignSwitcher";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -81,7 +80,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         {children}
-        <DesignSwitcher />
       </body>
     </html>
   );

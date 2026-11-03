@@ -74,7 +74,8 @@ const PRIMARY_NAV = ["/", "/dodd-agency-provider/", "/health-care-consultant/", 
 // Design concepts render the same site under /a/, /b/ and /c/.
 const CONCEPTS = ["a", "d"]; // active concepts (see src/concepts/config.ts)
 const withPrefix = (concept, href) => (concept ? (href === "/" ? `/${concept}/` : `/${concept}${href}`) : href);
-const ROUTES = new Set([...PRIMARY_NAV, ...CONCEPTS.flatMap((c) => PRIMARY_NAV.map((h) => withPrefix(c, h)))]);
+// The root is a design chooser; every site page lives under a concept prefix.
+const ROUTES = new Set(["/", ...CONCEPTS.flatMap((c) => PRIMARY_NAV.map((h) => withPrefix(c, h)))]);
 
 const problems = [];
 
@@ -115,9 +116,13 @@ function scan(label, text, terms, allow = []) {
   }
 }
 
+// Builds for sub-path hosting (GitHub Pages) prefix every internal link.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const stripBase = (href) => (BASE_PATH && (href === BASE_PATH || href.startsWith(`${BASE_PATH}/`)) ? href.slice(BASE_PATH.length) || "/" : href);
+
 function links(html) {
   return [...html.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi)].map((m) => ({
-    href: decode(m[1]),
+    href: stripBase(decode(m[1])),
     label: decode(m[2].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim(),
   }));
 }
@@ -128,11 +133,7 @@ for (const file of await walk(SRC, [".ts", ".tsx", ".css"])) {
   const rel = path.relative(root, file);
   scan(rel, text, SERVICE_TERMS);
   if (rel.startsWith(path.join("src", "content"))) {
-    // Content files hold reviewer notes as `reviewNote`/`reviewNotes`; skip those values.
-    const withoutNotes = text
-      .replace(/reviewNote:\s*"[^"]*"/g, "")
-      .replace(/reviewNotes:\s*\[[\s\S]*?\],\n/g, "");
-    scan(rel, withoutNotes, CLAIM_TERMS, CLAIM_ALLOW);
+    scan(rel, text, CLAIM_TERMS, CLAIM_ALLOW);
   }
 }
 
@@ -143,14 +144,18 @@ if (pages.length === 0) problems.push("out/: no HTML found. Run `npm run build` 
 for (const file of pages) {
   const html = await readFile(file, "utf8");
   const rel = path.relative(root, file);
-  const concept = rel.match(/^out\/([ad])\//)?.[1];
+  const isChooser = rel === path.join("out", "index.html");
+  // 404 pages use the Heritage header and footer.
+  const concept = rel.match(/^out\/([ad])\//)?.[1] ?? (/404|_not-found/.test(rel) ? "a" : undefined);
   const expectedUseful = USEFUL_LINKS.map((l) => ({ ...l, href: withPrefix(concept, l.href) }));
   const expectedNav = PRIMARY_NAV.map((h) => withPrefix(concept, h));
   scan(rel, html, SERVICE_TERMS);
   scan(`${rel} (visible text)`, visibleText(html), CLAIM_TERMS, CLAIM_ALLOW);
 
   const useful = html.match(/<nav aria-labelledby="footer-useful-links"[\s\S]*?<\/nav>/i);
-  if (!useful) {
+  if (isChooser) {
+    // The chooser has no site navigation; only content and links are checked.
+  } else if (!useful) {
     problems.push(`${rel}: footer Useful Links nav not found`);
   } else {
     const found = links(useful[0]);
@@ -160,8 +165,8 @@ for (const file of pages) {
     if (!ok) problems.push(`${rel}: Useful Links must be exactly ${JSON.stringify(expectedUseful)}, found ${JSON.stringify(found)}`);
   }
 
-  const navs = [...html.matchAll(/<nav aria-label="Primary"[\s\S]*?<\/nav>/gi)];
-  if (navs.length !== 2) problems.push(`${rel}: expected desktop + mobile primary nav, found ${navs.length}`);
+  const navs = isChooser ? [] : [...html.matchAll(/<nav aria-label="Primary"[\s\S]*?<\/nav>/gi)];
+  if (!isChooser && navs.length !== 2) problems.push(`${rel}: expected desktop + mobile primary nav, found ${navs.length}`);
   for (const nav of navs) {
     const hrefs = links(nav[0])
       .map((l) => l.href)

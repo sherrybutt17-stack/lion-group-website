@@ -2,7 +2,7 @@
 
 /*
  * Brand tokens taken from the live site's Elementor kit (post-17.css).
- * gold-50 is a light tint of the brand gold, used for subtle surfaces and review flags.
+ * gold-50 is a light tint of the brand gold, used for subtle surfaces.
  */
 @theme {
   --color-gold-50: #fbf6e6;
@@ -249,33 +249,6 @@
     border-color: var(--color-gold-500);
   }
 
-  /* Review flags: visible markers for copy and claims awaiting client approval. */
-  .review-flag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.125rem 0.625rem;
-    border: 1px dashed var(--color-gold-700);
-    border-radius: 999px;
-    background: var(--color-gold-50);
-    color: var(--color-gold-700);
-    font-family: var(--font-ui);
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.6;
-    letter-spacing: 0.02em;
-    vertical-align: middle;
-  }
-
-  .placeholder-text {
-    display: block;
-    padding: 0.75rem 1rem;
-    border: 1px dashed var(--color-grey);
-    border-radius: 0.5rem;
-    background: var(--color-paper);
-    color: var(--color-ink-soft);
-    font-style: italic;
-  }
 
   .brand-blob {
     border-radius: var(--radius-blob);

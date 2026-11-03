@@ -108,7 +108,6 @@ export function ConceptFooter({ concept }: { concept: ConceptId }) {
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <p>Design concept for client review. Not for publication.</p>
         </div>
       </div>
     </footer>

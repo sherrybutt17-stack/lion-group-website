@@ -1,4 +1,5 @@
 import { imageManifest, type ImageName } from "@/lib/images.generated";
+import { asset } from "@/lib/paths";
 
 interface PictureProps {
   name: ImageName;
@@ -16,8 +17,8 @@ export function Picture({ name, alt, sizes, priority = false, className }: Pictu
   // Use the largest generated file's dimensions so attribute and file ratios match exactly.
   const width = widths[widths.length - 1];
   const height = Math.round((width * srcHeight) / srcWidth);
-  const srcSet = (ext: string) => widths.map((w) => `/images/${name}-${w}.${ext} ${w}w`).join(", ");
-  const fallback = `/images/${name}-${widths[widths.length - 1]}.webp`;
+  const srcSet = (ext: string) => widths.map((w) => `${asset(`/images/${name}-${w}.${ext}`)} ${w}w`).join(", ");
+  const fallback = asset(`/images/${name}-${widths[widths.length - 1]}.webp`);
 
   return (
     <picture>

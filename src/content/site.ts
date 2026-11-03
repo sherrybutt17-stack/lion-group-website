@@ -1,8 +1,6 @@
 // Site-wide facts and navigation. Contact details are taken from the current
 // live site (theliongroup.us) and still need client confirmation (see docs/APPROVALS.md).
 
-export type ReviewKind = "draft" | "placeholder" | "assumption" | "confirm";
-
 export interface NavLink {
   label: string;
   href: string;
@@ -53,6 +51,3 @@ export const footerNav = {
   ] satisfies NavLink[],
 };
 
-// Approval tags are off: pending items are tracked in docs/APPROVALS.md and pages
-// show placeholders instead. Set NEXT_PUBLIC_REVIEW_FLAGS=on to see the tags again.
-export const showReviewFlags = process.env.NEXT_PUBLIC_REVIEW_FLAGS === "on";

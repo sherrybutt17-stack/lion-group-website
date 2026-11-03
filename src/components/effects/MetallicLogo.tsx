@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { asset } from "@/lib/paths";
 import { Picture } from "../Picture";
 import { useIdleMotionReady, useMotionPaused } from "./motionPreference";
 
@@ -34,7 +35,7 @@ export function MetallicLogo({ className = "", sizes = "320px", priority = false
       {live && (
         <div className="shader-fade-in absolute inset-0 [&_canvas]:!h-full [&_canvas]:!w-full">
           <MetallicPaint
-            imageSrc="/images/logo-lion-L-depth.png"
+            imageSrc={asset("/images/logo-lion-L-depth.png")}
             lightColor="#fff6d6"
             darkColor="#311c20"
             tintColor="#dcad18"
