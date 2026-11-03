@@ -1,0 +1,43 @@
+{
+  "name": "theliongroup-mockup",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Lion Group website redesign mockup (two services + careers). Not for publication without client approval.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node scripts/serve.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "images": "node scripts/optimize-images.mjs",
+    "check:services": "node scripts/check-excluded.mjs",
+    "qa": "node scripts/qa.mjs",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "verify": "npm run lint && npm run typecheck && npm run build && npm run check:services"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "lucide-react": "^1.66.0",
+    "motion": "^14.9.0",
+    "next": "^16.4.4",
+    "ogl": "^1.0.11",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.4",
+    "lighthouse": "^13.6.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.3"
+  }
+}

@@ -1,0 +1,1230 @@
+@import "tailwindcss";
+
+/*
+ * Brand tokens taken from the live site's Elementor kit (post-17.css).
+ * gold-50 is a light tint of the brand gold, used for subtle surfaces and review flags.
+ */
+@theme {
+  --color-gold-50: #fbf6e6;
+  --color-gold-100: #f6ecc8;
+  --color-gold-200: #f2d471;
+  --color-gold-400: #dcad18;
+  --color-gold-500: #bd9337;
+  --color-gold-700: #7e6821;
+  --color-brown-800: #38272a;
+  --color-brown-900: #311c20;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #303030;
+  --color-body: #4f4f4f;
+  --color-grey: #a5a5a5;
+  --color-line-strong: #dddddd;
+  --color-line: #e7e7e7;
+  --color-mist: #f4f4f4;
+  --color-paper: #fbfbfb;
+  /* Functional form-error colors (not part of the brand palette). */
+  --color-error: #b42318;
+  --color-error-bg: #fef3f2;
+
+  --font-serif: var(--font-poly), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-lato), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ui: var(--font-space-grotesk), var(--font-lato), system-ui, sans-serif;
+
+  /* Horizontal nav needs ~1200px for six items with full service names. */
+  --breakpoint-nav: 75rem;
+
+  --text-display: clamp(2.125rem, 1.55rem + 2.6vw, 3.5rem);
+  --text-display--line-height: 1.1;
+  --text-title: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
+  --text-title--line-height: 1.15;
+  --text-lede: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --text-lede--line-height: 1.6;
+
+  --radius-blob: 0 45% 45% 45% / 0 42% 50% 50%;
+}
+
+/* Concept tokens (set per [data-concept] below) exposed as utilities: bg-c-bg, text-c-ink, … */
+@theme inline {
+  --color-c-bg: var(--c-bg);
+  --color-c-bg-alt: var(--c-bg-alt);
+  --color-c-surface: var(--c-surface);
+  --color-c-ink: var(--c-ink);
+  --color-c-muted: var(--c-muted);
+  --color-c-line: var(--c-line);
+  --color-c-accent: var(--c-accent);
+  --color-c-accent-soft: var(--c-accent-soft);
+  --color-c-on-accent: var(--c-on-accent);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: 1rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-body);
+    background: #fff;
+    overflow-wrap: break-word;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-gold-700);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-gold-400);
+  }
+
+  [id] {
+    scroll-margin-top: 1rem;
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  /* Let the <img> inside <picture> be sized directly by its own classes.
+   * <source> isn't hidden by default, so keep it out of flex/grid layout. */
+  picture {
+    display: contents;
+  }
+
+  picture > source {
+    display: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-ui);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold-700);
+  }
+
+  .on-dark .eyebrow {
+    color: var(--color-gold-400);
+  }
+
+  .prose-body > * + * {
+    margin-top: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.875rem;
+    padding: 0.625rem 1.375rem;
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-decoration: none;
+    text-align: center;
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+
+  .btn-primary {
+    background: var(--color-gold-700);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-brown-900);
+  }
+
+  .btn-secondary {
+    border: 2px solid var(--color-ink);
+    color: var(--color-ink);
+    background: transparent;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .on-dark .btn-primary {
+    background: var(--color-gold-400);
+    color: var(--color-ink);
+  }
+
+  .on-dark .btn-primary:hover {
+    background: var(--color-gold-200);
+  }
+
+  .on-dark .btn-secondary {
+    border-color: var(--color-gold-200);
+    color: #fff;
+  }
+
+  .on-dark .btn-secondary:hover {
+    background: var(--color-gold-200);
+    color: var(--color-ink);
+  }
+
+  .text-link {
+    color: var(--color-gold-700);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .text-link:hover {
+    color: var(--color-brown-900);
+    text-decoration-thickness: 2px;
+  }
+
+  .on-dark .text-link {
+    color: var(--color-gold-200);
+  }
+
+  .on-dark .text-link:hover {
+    color: #fff;
+  }
+
+  /* Card lift on hover/focus. Disabled for reduced motion below. */
+  .card-interactive {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .card-interactive:hover,
+  .card-interactive:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -18px rgb(49 28 32 / 0.45);
+    border-color: var(--color-gold-500);
+  }
+
+  /* Review flags: visible markers for copy and claims awaiting client approval. */
+  .review-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.125rem 0.625rem;
+    border: 1px dashed var(--color-gold-700);
+    border-radius: 999px;
+    background: var(--color-gold-50);
+    color: var(--color-gold-700);
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+  }
+
+  .placeholder-text {
+    display: block;
+    padding: 0.75rem 1rem;
+    border: 1px dashed var(--color-grey);
+    border-radius: 0.5rem;
+    background: var(--color-paper);
+    color: var(--color-ink-soft);
+    font-style: italic;
+  }
+
+  .brand-blob {
+    border-radius: var(--radius-blob);
+  }
+}
+
+/* Section reveals (Motion). Content is hidden only when JS has run, motion is
+ * allowed, and the reveal script hasn't been marked as failed. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.reveal-off) [data-reveal]:not([data-reveal="clip"]):not([data-revealed]) {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card-interactive:hover,
+  .card-interactive:focus-within {
+    transform: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ───────────────────────── Design concepts (/a/, /b/, /c/) ───────────────────────── */
+
+[data-concept] {
+  background: var(--c-bg);
+  color: var(--c-muted);
+}
+
+[data-concept] .container-page {
+  max-width: 90rem;
+}
+
+@media (min-width: 64rem) {
+  [data-concept] .container-page {
+    padding-inline: 3rem;
+  }
+}
+
+/* A · Heritage: black and gold (black base requested by the client team). */
+[data-concept="a"] {
+  --c-bg: #0a0a0a;
+  --c-bg-alt: #121212;
+  --c-surface: rgb(255 255 255 / 0.04);
+  --c-ink: #f4f4f4;
+  --c-muted: #dddddd;
+  --c-line: rgb(242 212 113 / 0.18);
+  --c-accent: #dcad18;
+  --c-accent-soft: #f2d471;
+  --c-on-accent: #1a1a1a;
+}
+
+/* B · Daylight: warm paper with brand gold and brown. */
+[data-concept="b"] {
+  --c-bg: #fbfbfb;
+  --c-bg-alt: #f4f4f4;
+  --c-surface: #ffffff;
+  --c-ink: #1a1a1a;
+  --c-muted: #4f4f4f;
+  --c-line: #e7e7e7;
+  --c-accent: #7e6821;
+  --c-accent-soft: #fbf6e6;
+  --c-on-accent: #ffffff;
+}
+
+/* C · Momentum: ink and bright gold. */
+[data-concept="c"] {
+  --c-bg: #1a1a1a;
+  --c-bg-alt: #303030;
+  --c-surface: rgb(255 255 255 / 0.05);
+  --c-ink: #f4f4f4;
+  --c-muted: #dddddd;
+  --c-line: rgb(255 255 255 / 0.14);
+  --c-accent: #dcad18;
+  --c-accent-soft: #f2d471;
+  --c-on-accent: #1a1a1a;
+}
+
+/* D · Gilded: black base with molten gold. */
+[data-concept="d"] {
+  --c-bg: #0a0a0a;
+  --c-bg-alt: #121212;
+  --c-surface: rgb(255 255 255 / 0.05);
+  --c-ink: #f4f4f4;
+  --c-muted: #dddddd;
+  --c-line: rgb(242 212 113 / 0.22);
+  --c-accent: #dcad18;
+  --c-accent-soft: #f2d471;
+  --c-on-accent: #1a1a1a;
+}
+
+/* E · Atelier: printed paper, ink rules, brand gold. */
+[data-concept="e"] {
+  --c-bg: #fbfbfb;
+  --c-bg-alt: #f4f4f4;
+  --c-surface: #ffffff;
+  --c-ink: #1a1a1a;
+  --c-muted: #4f4f4f;
+  --c-line: rgb(26 26 26 / 0.16);
+  --c-accent: #7e6821;
+  --c-accent-soft: #fbf6e6;
+  --c-on-accent: #ffffff;
+  --c-btn-bg: linear-gradient(135deg, #7e6821, #38272a);
+}
+
+/* Premium button fills: gold gradient on dark concepts, brown-gold on light. */
+[data-concept="a"],
+[data-concept="c"],
+[data-concept="d"] {
+  --c-btn-bg: linear-gradient(135deg, #f2d471 0%, #dcad18 45%, #bd9337 100%);
+}
+
+[data-concept="b"] {
+  --c-btn-bg: linear-gradient(135deg, #7e6821, #38272a);
+}
+
+/* Light sections inside dark concepts reuse the light tokens. */
+[data-concept] .tone-light {
+  --c-btn-bg: linear-gradient(135deg, #7e6821, #38272a);
+  --c-bg: #fbfbfb;
+  --c-bg-alt: #f4f4f4;
+  --c-surface: #ffffff;
+  --c-ink: #1a1a1a;
+  --c-muted: #4f4f4f;
+  --c-line: #dddddd;
+  --c-accent: #7e6821;
+  --c-accent-soft: #fbf6e6;
+  --c-on-accent: #ffffff;
+  background: var(--c-bg);
+  color: var(--c-muted);
+}
+
+[data-concept] .tone-gold {
+  --c-btn-bg: linear-gradient(135deg, #38272a, #1a1a1a);
+  --c-bg: #dcad18;
+  --c-bg-alt: #f2d471;
+  --c-surface: rgb(255 255 255 / 0.25);
+  --c-ink: #1a1a1a;
+  --c-muted: #1a1a1a;
+  --c-line: rgb(26 26 26 / 0.25);
+  --c-accent: #1a1a1a;
+  --c-accent-soft: #311c20;
+  --c-on-accent: #f4f4f4;
+  background: var(--c-bg);
+  color: var(--c-muted);
+}
+
+[data-concept] .tone-brown {
+  --c-bg: #311c20;
+  --c-bg-alt: #38272a;
+  --c-surface: rgb(255 255 255 / 0.05);
+  --c-ink: #f4f4f4;
+  --c-muted: #dddddd;
+  --c-line: rgb(242 212 113 / 0.22);
+  --c-accent: #dcad18;
+  --c-accent-soft: #f2d471;
+  --c-on-accent: #1a1a1a;
+  background: var(--c-bg);
+  color: var(--c-muted);
+}
+
+[data-concept] :focus-visible {
+  outline-color: var(--c-accent);
+}
+
+[data-concept] .tone-gold :focus-visible {
+  outline-color: #1a1a1a;
+}
+
+html:has([data-concept]) {
+  scroll-padding-top: 6.5rem;
+}
+
+/* Film grain: static texture, no motion. */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.label-concept {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+/* Animated underline for text links. */
+.link-sweep {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+  text-decoration: none;
+}
+
+.link-sweep:hover,
+.link-sweep:focus-visible {
+  background-size: 100% 1px;
+}
+
+.link-sweep-static {
+  background-size: 100% 1px;
+}
+
+.link-sweep-static:hover {
+  background-size: 100% 2px;
+}
+
+/* Concept buttons: pill with a sliding arrow. */
+.btn-c {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  overflow: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+
+.btn-c .btn-c-arrow {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-c:hover .btn-c-arrow,
+.btn-c:focus-visible .btn-c-arrow {
+  transform: translateX(3px) rotate(-45deg);
+}
+
+.btn-c-primary {
+  background: var(--c-btn-bg, var(--c-accent));
+  color: var(--c-on-accent);
+  box-shadow: 0 10px 30px -14px rgb(220 173 24 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.35);
+}
+
+.btn-c-primary .btn-c-arrow {
+  background: var(--c-on-accent);
+  color: var(--c-accent);
+}
+
+.btn-c-primary:hover {
+  background: var(--c-ink);
+  color: var(--c-bg);
+}
+
+.btn-c-primary:hover .btn-c-arrow {
+  background: var(--c-bg);
+  color: var(--c-ink);
+}
+
+.btn-c-ghost {
+  border: 1.5px solid currentColor;
+  color: var(--c-ink);
+}
+
+.btn-c-ghost:hover {
+  background: var(--c-ink);
+  border-color: var(--c-ink);
+  color: var(--c-bg);
+}
+
+/* Header condenses after scrolling (data-scrolled set by ConceptMotion). */
+[data-header] {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
+}
+
+/* Index rows (services list) with a gold sweep on hover. */
+.index-row {
+  position: relative;
+  isolation: isolate;
+}
+
+.index-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-surface);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.index-row:hover::before,
+.index-row:focus-within::before {
+  transform: scaleY(1);
+}
+
+.index-row .index-title {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+}
+
+.index-row:hover .index-title,
+.index-row:focus-within .index-title {
+  transform: translateX(0.75rem);
+  color: var(--c-accent-soft);
+}
+
+.index-row .index-arrow {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, color 0.3s ease;
+}
+
+.index-row:hover .index-arrow,
+.index-row:focus-within .index-arrow {
+  transform: rotate(-45deg);
+  background: var(--c-accent);
+  color: var(--c-on-accent);
+}
+
+/* Outlined display text (decorative only). */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-line);
+}
+
+/* Designed placeholder frame for client-supplied photography. */
+.image-placeholder {
+  background-color: var(--c-surface);
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgb(126 104 33 / 0.08) 14px 15px);
+  border: 1px dashed var(--c-line);
+}
+
+/* Spotlight that follows the pointer (CSS variables set by ConceptMotion). */
+[data-spotlight] {
+  --mx: 70%;
+  --my: 30%;
+  background-image: radial-gradient(38rem circle at var(--mx) var(--my), rgb(220 173 24 / 0.13), transparent 60%);
+}
+
+/* Stacked service panels (Concept C). */
+.stack-panel {
+  position: sticky;
+  top: 6rem;
+  transform-origin: 50% 0;
+}
+
+/* ── Entrance animations that run without waiting for JavaScript (hero, above the fold). ── */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.word-mask > span {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .word-mask > span {
+    animation: c-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(80ms + var(--i, 0) * 55ms);
+  }
+
+  .enter-fade {
+    animation: c-fade 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 500ms);
+  }
+
+  .enter-rule {
+    transform-origin: left;
+    animation: c-rule 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 200ms);
+  }
+
+  .rays line {
+    stroke-dasharray: 1;
+    animation: c-draw 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(300ms + var(--i, 0) * 14ms);
+  }
+
+  .enter-mark {
+    animation: c-mark 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 250ms;
+  }
+
+  .sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sheen::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(105deg, transparent 40%, rgb(255 244 200 / 0.55) 50%, transparent 60%);
+    transform: translateX(-120%);
+    animation: c-sheen 1.8s cubic-bezier(0.4, 0, 0.2, 1) 1.1s 1 both;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .draw-underline path {
+    stroke-dasharray: 1;
+    animation: c-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation-delay: var(--d, 900ms);
+  }
+}
+
+@keyframes c-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes c-fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes c-rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes c-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes c-mark {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes c-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* Scroll-driven states, applied only once ConceptMotion is running (html.js + motion allowed). */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.reveal-off) [data-reveal="clip"]:not([data-revealed]) {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  html.js:not(.reveal-off) [data-reveal-item]:not([data-revealed]) {
+    opacity: 0;
+  }
+
+  html.js:not(.reveal-off) [data-draw]:not([data-revealed]) path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ───────────────────────── Effects (React Bits WebGL + CSS) ───────────────────────── */
+
+.light-rays-container,
+.threads-container,
+.grainient-container,
+.molten-metal-container,
+.topography-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.light-rays-container canvas,
+.threads-container canvas,
+.grainient-container canvas,
+.molten-metal-container canvas,
+.topography-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.paint-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shader-fade-in {
+  animation: fx-fade 1.8s ease both;
+}
+
+@keyframes fx-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Gold text with a slow travelling sheen (ambient, pausable). */
+.text-gold-shine {
+  background: linear-gradient(110deg, #bd9337 0%, #f2d471 18%, #fff6d6 26%, #dcad18 36%, #bd9337 55%, #f2d471 78%, #bd9337 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .text-gold-shine {
+    animation: fx-shine 7s linear infinite;
+  }
+
+  .glow-border::before {
+    animation: fx-spin 5s linear infinite;
+  }
+}
+
+@keyframes fx-shine {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+/* Rotating gold border for hero calls to action (ambient, pausable). */
+@property --fx-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.glow-border {
+  position: relative;
+  isolation: isolate;
+  overflow: visible !important;
+}
+
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(from var(--fx-angle), transparent 0 55%, #f2d471 70%, #fff6d6 75%, #dcad18 82%, transparent 92%);
+}
+
+@keyframes fx-spin {
+  to {
+    --fx-angle: 360deg;
+  }
+}
+
+/* Glare that sweeps across a card on hover/focus. */
+.glare {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.glare::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgb(255 246 214 / 0.18) 48%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glare:hover::after,
+.glare:focus-within::after {
+  transform: translateX(120%);
+}
+
+/* Border light that follows the pointer (uses --mx/--my from data-spotlight). */
+.edge-glow {
+  position: relative;
+}
+
+.edge-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(22rem circle at var(--mx, 50%) var(--my, 0%), rgb(242 212 113 / 0.85), rgb(242 212 113 / 0.12) 45%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Halftone portrait (Concept E): dots grow into the full photo on load and
+ * shrink back toward a print halftone on hover. */
+@property --dot {
+  syntax: "<percentage>";
+  initial-value: 101%;
+  inherits: false;
+}
+
+.halftone-reveal {
+  -webkit-mask-image: radial-gradient(circle at center, #000 var(--dot), transparent calc(var(--dot) + 1%));
+  mask-image: radial-gradient(circle at center, #000 var(--dot), transparent calc(var(--dot) + 1%));
+  -webkit-mask-size: 6px 6px;
+  mask-size: 6px 6px;
+  transition: --dot 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .halftone-reveal {
+    animation: fx-halftone 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.3s both;
+  }
+
+  figure:hover .halftone-reveal {
+    --dot: 62%;
+  }
+}
+
+/* 101% of the cell's corner distance = fully covered, i.e. the plain photo. */
+@keyframes fx-halftone {
+  from {
+    --dot: 10%;
+  }
+  to {
+    --dot: 101%;
+  }
+}
+
+/* Pause control: ambient loops pause; entrances are skipped instead of frozen. */
+html.motion-paused .ambient,
+html.motion-paused .ambient::before,
+html.motion-paused .ambient::after,
+html.motion-paused .text-gold-shine,
+html.motion-paused .glow-border::before {
+  animation-play-state: paused !important;
+}
+
+html.motion-paused :is(.word-mask > span, .enter-fade, .enter-rule, .enter-mark, .rays line, .draw-underline path, .halftone-reveal) {
+  animation: none !important;
+}
+
+html.motion-paused .sheen::after {
+  animation: none !important;
+}
+
+/* ───────────────────────── Brand gradients ───────────────────────── */
+
+/* Deep brown with soft gold light pools. */
+.bg-mesh-dark {
+  background-color: #311c20;
+  background-image:
+    radial-gradient(60rem 40rem at 12% -10%, rgb(220 173 24 / 0.16), transparent 60%),
+    radial-gradient(50rem 36rem at 95% 10%, rgb(189 147 55 / 0.14), transparent 60%),
+    radial-gradient(70rem 40rem at 50% 120%, rgb(126 104 33 / 0.28), transparent 60%),
+    linear-gradient(180deg, #311c20 0%, #38272a 100%);
+}
+
+/* Molten fallback (shown before/instead of the WebGL effect). */
+.bg-mesh-molten {
+  background-color: #311c20;
+  background-image:
+    radial-gradient(40rem 26rem at 30% 35%, rgb(220 173 24 / 0.35), transparent 65%),
+    radial-gradient(36rem 28rem at 75% 65%, rgb(189 147 55 / 0.32), transparent 65%),
+    radial-gradient(60rem 40rem at 50% 50%, rgb(126 104 33 / 0.3), transparent 70%),
+    linear-gradient(160deg, #1a1a1a, #000000);
+}
+
+/* Warm paper with pale gold light. */
+.bg-mesh-light {
+  background-color: #fbfbfb;
+  background-image:
+    radial-gradient(50rem 30rem at 0% 0%, rgb(242 212 113 / 0.22), transparent 60%),
+    radial-gradient(40rem 30rem at 100% 20%, rgb(251 246 230 / 1), transparent 60%),
+    radial-gradient(60rem 30rem at 60% 110%, rgb(220 173 24 / 0.12), transparent 60%);
+}
+
+/* Gold band: ink text stays above 6:1 everywhere on it. */
+.bg-mesh-gold {
+  background-color: #dcad18;
+  background-image:
+    radial-gradient(50rem 30rem at 15% 0%, rgb(255 246 214 / 0.55), transparent 60%),
+    radial-gradient(40rem 30rem at 100% 100%, rgb(189 147 55 / 0.7), transparent 60%),
+    linear-gradient(120deg, #f2d471 0%, #dcad18 50%, #bd9337 100%);
+}
+
+/* Static gold gradient text for dark backgrounds (lowest stop #bd9337 ≥ 4.9:1). */
+.text-gradient-gold {
+  background: linear-gradient(120deg, #fff6d6 0%, #f2d471 30%, #dcad18 65%, #bd9337 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Dark brown-gold gradient text for light backgrounds (all stops ≥ 5.4:1). */
+.text-gradient-ink {
+  background: linear-gradient(120deg, #7e6821 0%, #38272a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline that fades out at both ends. */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #dcad18 20%, #f2d471 50%, #dcad18 80%, transparent);
+}
+
+/* 1px gradient border for cards and panels. */
+.border-gradient-gold {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card-bg, var(--c-bg)), var(--card-bg, var(--c-bg))) padding-box,
+    linear-gradient(135deg, rgb(242 212 113 / 0.75), rgb(242 212 113 / 0.08) 40%, rgb(189 147 55 / 0.5)) border-box;
+}
+
+/* Frosted glass surface for dark concepts. */
+.glass {
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.02));
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+/* Soft glowing orb behind portraits (ambient, pausable). */
+.orb-glow {
+  background: radial-gradient(circle at 50% 50%, rgb(242 212 113 / 0.55), rgb(220 173 24 / 0.25) 35%, transparent 68%);
+  filter: blur(8px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .orb-glow {
+    animation: fx-breathe 7s ease-in-out infinite;
+  }
+}
+
+@keyframes fx-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+html.motion-paused .orb-glow {
+  animation-play-state: paused !important;
+}
+
+/* ───────────────────────── Noir gradients (Concepts A and D) ───────────────────────── */
+
+/* Page-wide wash: gold and warm-brown light pools spread down the whole page,
+ * so every section without its own background still sits on a gradient. */
+[data-concept="a"],
+[data-concept="d"] {
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(70rem 50rem at 0% 6%, rgb(220 173 24 / 0.08), transparent 60%),
+    radial-gradient(60rem 50rem at 100% 22%, rgb(49 28 32 / 0.85), transparent 65%),
+    radial-gradient(70rem 50rem at 0% 45%, rgb(49 28 32 / 0.7), transparent 65%),
+    radial-gradient(60rem 40rem at 100% 62%, rgb(189 147 55 / 0.07), transparent 60%),
+    radial-gradient(70rem 50rem at 10% 85%, rgb(49 28 32 / 0.75), transparent 65%),
+    linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+}
+
+/* Hero: black with a warm brown core and a soft gold crown. */
+.bg-noir-hero {
+  background-color: #000000;
+  background-image:
+    radial-gradient(60rem 36rem at 78% 45%, rgb(49 28 32 / 0.95), transparent 65%),
+    radial-gradient(40rem 28rem at 80% 40%, rgb(189 147 55 / 0.18), transparent 60%),
+    radial-gradient(70rem 30rem at 50% -10%, rgb(220 173 24 / 0.12), transparent 60%),
+    linear-gradient(180deg, #0a0a0a, #000000);
+}
+
+/* Default section: gold glow top-left, brown pool bottom-right. */
+.bg-noir {
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(55rem 35rem at 0% 0%, rgb(220 173 24 / 0.1), transparent 60%),
+    radial-gradient(60rem 40rem at 100% 100%, rgb(49 28 32 / 0.9), transparent 65%),
+    linear-gradient(180deg, #0a0a0a, #050505);
+}
+
+/* Warm section: brown wash fading into black. */
+.bg-noir-warm {
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(50rem 30rem at 85% 0%, rgb(189 147 55 / 0.12), transparent 60%),
+    linear-gradient(160deg, #311c20 0%, #1a1a1a 45%, #050505 100%);
+}
+
+/* Spotlight section: centred gold light on black. */
+.bg-noir-center {
+  background-color: #050505;
+  background-image:
+    radial-gradient(45rem 30rem at 50% 40%, rgb(220 173 24 / 0.12), transparent 65%),
+    radial-gradient(70rem 40rem at 50% 100%, rgb(49 28 32 / 0.8), transparent 65%),
+    linear-gradient(180deg, #050505, #0a0a0a);
+}
+
+/* Call-to-action band: brown-black gradient between gold hairlines. */
+.bg-noir-cta {
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(40rem 24rem at 15% 50%, rgb(220 173 24 / 0.16), transparent 60%),
+    radial-gradient(50rem 30rem at 90% 50%, rgb(189 147 55 / 0.1), transparent 60%),
+    linear-gradient(110deg, #311c20 0%, #1a1a1a 50%, #311c20 100%);
+}
+
+/* Dark form panel: inputs, notices and errors restyled for black backgrounds. */
+.form-dark {
+  color-scheme: dark;
+  color: #dddddd;
+}
+
+.form-dark :is(label, legend, h2, h3, .text-ink) {
+  color: #f4f4f4;
+}
+
+.form-dark .text-body {
+  color: #dddddd;
+}
+
+.form-dark :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
+  background-color: rgb(255 255 255 / 0.04);
+  color: #f4f4f4;
+  border-color: rgb(255 255 255 / 0.4);
+}
+
+.form-dark :is(input, textarea, select):focus {
+  border-color: #dcad18;
+}
+
+.form-dark :focus-visible {
+  outline-color: #dcad18;
+}
+
+.form-dark .text-error {
+  color: #fda29b;
+}
+
+.form-dark .border-error,
+.form-dark [aria-invalid="true"] {
+  border-color: #fda29b;
+}
+
+.form-dark .bg-error-bg {
+  background-color: rgb(253 162 155 / 0.08);
+}
+
+.form-dark .bg-gold-50 {
+  background-color: rgb(242 212 113 / 0.08);
+}
+
+.form-dark .border-gold-700 {
+  border-color: rgb(242 212 113 / 0.45);
+}
+
+.form-dark .text-gold-700,
+.form-dark .text-link {
+  color: #f2d471;
+}
+
+.form-dark .bg-mist {
+  background-color: rgb(255 255 255 / 0.05);
+}
+
+.form-dark .border-ink-soft {
+  border-color: rgb(255 255 255 / 0.4);
+}
+
+.form-dark .btn-primary {
+  background: linear-gradient(135deg, #f2d471 0%, #dcad18 45%, #bd9337 100%);
+  color: #1a1a1a;
+}
+
+.form-dark .btn-primary:hover {
+  background: #f4f4f4;
+  color: #1a1a1a;
+}
+
+.form-dark input[type="file"]::file-selector-button {
+  background: linear-gradient(135deg, #f2d471, #bd9337);
+  color: #1a1a1a;
+}
