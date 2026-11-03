@@ -2,9 +2,9 @@
 
 Everything below must be confirmed by The Lion Group before the site is published.
 
-**How pending items appear on the pages.** Pages no longer carry "pending approval" tags. Where content is missing, the site shows placeholders instead:
-- **Copy placeholders**, in [brackets] and styled as dashed boxes. Examples: the Health Care Consultant scope, FAQ answers about certification and service area, open positions, and the careers privacy wording.
-- **Image placeholders**, labelled "Image placeholder", marking where real photography goes. They mark photos still needed: a home or shared living space (homepage gallery) and program or consulting photos (service pages). The other two gallery slots now show the client's own photos.
+**How pending items appear on the pages.** Pages carry no "pending approval" tags and no placeholders. Where details are unconfirmed, the copy stays neutral and makes no claims, or the item is left out. Every such spot is listed below.
+- **Photos:** every photo slot uses the client's own photos from the current site, reused across pages because only a few exist. More real photos would add variety.
+- **Left out until confirmed:** the DODD certification FAQ, the "Client stories" testimonial section, the open positions list, and the careers details on where applications go and how long they're kept.
 
 All other copy on the pages is a draft adapted from the current website. It is listed below and still needs the client's sign-off.
 
@@ -20,7 +20,9 @@ The site promotes only **DODD Agency Provider** and **Health Care Consultant**. 
 - [ ] Should **childcare centers** and **transportation** appear anywhere? They are on the current site but were left out.
 - [ ] Confirm "person-centered planning" and "multidisciplinary coordination" describe Health Care Consultant.
 - [ ] Approve the audiences: adults and youth with developmental and behavioral needs, families and guardians, counties, and organizations.
-- [ ] Answer or remove the FAQ placeholders: certification, service area, housing availability, and what a consulting engagement looks like.
+- [ ] Approve the neutral FAQ answers on service area, housing availability, and what a consulting engagement looks like. Each points visitors to contact The Lion Group.
+- [ ] The FAQ "Is The Lion Group a certified DODD provider?" was removed. Add it back only with verified certification details.
+- [ ] Approve the second Health Care Consultant paragraph, adapted from the person-centered planning and coordination wording on the current site. Supply anything else the service covers.
 - [ ] Approve the homepage headline: "Support for developmental disability services and health care consulting."
 
 ## 2. Claims that must be verified before they can appear
@@ -55,17 +57,18 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 
 - [ ] Approve use of Dr. Coles's photos and their alt text. All come from the current site: the portrait on the gold shape (Concept A homepage), the plain cutout portrait (Concept D homepage), the smiling portrait on the gold circle (About page), the photo of him presenting with a headset microphone (homepage gallery), and the speaking photo (Concept C only).
 - [ ] Confirm the homepage gallery photo of Dr. Coles at a computer with a colleague: that it is him, and that the colleague agrees to appear on the website. Alt text: "Dr. Romey Coles Jr. reviewing work at a computer with a colleague".
+- [ ] Photos are reused: the computer photo appears in the homepage gallery and on both service pages. The presenting photo appears in the gallery and on the DODD Agency Provider page, and the speaking photo in the gallery and on the Health Care Consultant page.
 - [ ] The other images in the downloaded site folders were not used: stock photos (business meetings, wellness, training), removed-service images (real estate, live stream, strategy), testimonial avatars, and off-brand backgrounds. A second gold-shape portrait duplicates the one already used.
 - [ ] Supply a vector (SVG) version of the lion "L" logo. Only PNG files exist today.
 - [ ] Supply a higher-resolution portrait if available. The current file is 600px wide.
 - [ ] Supply an image for social sharing (Open Graph), or approve using the logo.
 - [ ] Real photography (team, programs, homes) would strengthen the service pages. The current /health-care/ photos look like stock images and were not used.
-- [ ] Testimonials: none are used. The six on the current site can't be verified and mostly refer to removed services. Supply real, consented testimonials if you want them.
+- [ ] Testimonials: none are used, and the homepage has no testimonial section. The six on the current site can't be verified and mostly refer to removed services. Supply real, consented testimonials if you want a section added.
 - [ ] Optional: the slogan "Live A Roaring Life!" was left out because it was tied to coaching programs. Say if you want it back.
 
 ## 5. Careers
 
-- [ ] Current open positions: title, type, location, and a short description.
+- [ ] Current open positions: title, type, location, and a short description. The page currently says no positions are listed and invites a general application.
 - [ ] Final application fields. The mockup asks for: name, email, phone, position, employment type, start date, experience, resume, and two required checkboxes.
 - [ ] **Where applications go**: a hiring inbox, an applicant tracking system, or WordPress.
 - [ ] **Secure resume storage** before the upload field is switched on.
@@ -92,5 +95,4 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 - [ ] Choose between the shortlisted directions, **A · Heritage** (`/a/`) or **D · Gilded** (`/d/`), both black with gold gradients. Elements can be mixed, e.g. D's molten hero with A's services index. (B, C, and E were set aside on 2026-11-03.)
 - [ ] Approve the motion level. Every concept respects the visitor's "reduce motion" setting, works without JavaScript, and has a "Pause animation" button (bottom-right) that stops all ambient animation and is remembered.
 - [ ] Note that the animated backgrounds use the visitor's graphics hardware (WebGL). They load only after the page is ready, pause when off-screen, and fall back to a static gold gradient.
-- [ ] Supply real photography for the remaining labelled image placeholders (the home or shared living slot in the homepage gallery, and the service pages), or approve removing those frames.
-- [ ] Supply a real, consented testimonial for the "Client stories" slot, or approve removing it.
+- [ ] Supply more real photography (programs, homes, the team) if you want more variety than the current photos of Dr. Coles.

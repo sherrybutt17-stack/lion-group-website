@@ -2,7 +2,6 @@ import { careers } from "@/content/careers";
 import { site } from "@/content/site";
 import type { ConceptId } from "@/concepts/config";
 import { ConceptButton } from "../ConceptButton";
-import { ConceptPlaceholder } from "../ConceptPlaceholder";
 import { SectionLabel } from "../SectionLabel";
 import { CareersForm } from "../../forms/CareersForm";
 import { PageHero } from "./PageHero";
@@ -70,8 +69,7 @@ export function CareersDetail({ concept }: { concept: ConceptId }) {
               <h2 id="openings-heading" className={`${h2Class[concept]} text-c-ink`}>
                 Open positions
               </h2>
-              <ConceptPlaceholder className="mt-8">{careers.openingsPlaceholder}</ConceptPlaceholder>
-              <p className="mt-5 text-lg">{careers.openingsFallback}</p>
+              <p className="mt-8 text-lg">{careers.openingsFallback}</p>
             </div>
           </div>
         </div>
@@ -100,9 +98,7 @@ export function CareersDetail({ concept }: { concept: ConceptId }) {
               {careers.privacy.map((item) => (
                 <div key={item.term}>
                   <dt className="font-ui text-sm font-semibold uppercase tracking-[0.12em] text-c-accent">{item.term}</dt>
-                  <dd className="mt-2">
-                    {item.placeholder ? <ConceptPlaceholder className="text-[0.9375rem]">{item.detail}</ConceptPlaceholder> : item.detail}
-                  </dd>
+                  <dd className="mt-2">{item.detail}</dd>
                 </div>
               ))}
               <div>

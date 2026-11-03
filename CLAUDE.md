@@ -8,7 +8,11 @@ Project guidance for Claude Code. It holds the working rules and commands, follo
 - Promote only **DODD Agency Provider** and **Health Care Consultant**, using the exact names. Careers is a section, not a service.
 - The footer's **Useful Links** contains exactly those two links.
 - Never add unverified claims: certification, licensure, years, 24/7, outcomes, Medicaid/waiver, or response times. Never add fabricated testimonials, people, stats, or badges. Pending items go in `docs/APPROVALS.md`.
-- No approval badges or review tooling on pages (user decision, 2026-11-03). Missing content shows as placeholders: bracketed copy slots (`ConceptPlaceholder`), labelled photo frames (`ImagePlaceholder`, `PlaceholderGallery`), and a testimonial slot (`TestimonialPlaceholder`). Never use stock photos or invented testimonials. Approval status lives only in `docs/APPROVALS.md`.
+- No approval badges, review tooling, or placeholders on pages (user decisions, 2026-11-03).
+  - Photo slots use only the client's own photos (`GalleryPhoto`, `PhotoGallery`), reused where needed. Never use stock photos.
+  - Where copy is unconfirmed, write neutral wording that makes no claims, or leave the item out. No bracketed slots.
+  - No testimonial section until a real, consented testimonial exists. Never invent one.
+  - Approval status lives only in `docs/APPROVALS.md`. `ConceptPlaceholder` and `ImagePlaceholder` remain only in the switched-off concepts B and C.
 - Motion must respect `prefers-reduced-motion`, keep all content visible without JS, never hide the H1/LCP element behind JS, and give any looping motion a pause control.
 - Forms stay non-submitting (`method="dialog"`, `useMockForm`) until the client confirms a destination. No secrets in frontend code.
 - Don't publish or deploy without client approval and authorized access.

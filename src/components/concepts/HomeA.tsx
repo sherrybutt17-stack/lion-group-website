@@ -6,7 +6,7 @@ import { LIGHT_RAYS } from "../effects/presets";
 import { ShaderStage } from "../effects/ShaderStage";
 import { ConceptButton } from "./ConceptButton";
 import { ManeRays } from "./ManeRays";
-import { PlaceholderGallery, TestimonialPlaceholder } from "./PlaceholderGallery";
+import { PhotoGallery } from "./PhotoGallery";
 import { ScrollWords } from "./ScrollWords";
 import { SectionLabel } from "./SectionLabel";
 import { ServiceIndex } from "./ServiceIndex";
@@ -114,7 +114,7 @@ export function HomeA() {
         </div>
       </section>
 
-      <PlaceholderGallery concept="a" />
+      <PhotoGallery concept="a" />
 
       {/* Approach */}
       <section aria-labelledby="approach-heading" className="bg-noir-warm py-24 md:py-36">
@@ -180,8 +180,6 @@ export function HomeA() {
           </div>
         </div>
       </section>
-
-      <TestimonialPlaceholder concept="a" />
 
       {/* Careers */}
       <section aria-labelledby="careers-heading" className="bg-noir-warm border-y border-c-line py-24 md:py-32">

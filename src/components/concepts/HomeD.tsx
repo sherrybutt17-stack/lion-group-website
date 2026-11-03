@@ -8,7 +8,7 @@ import { MetallicLogo } from "../effects/MetallicLogo";
 import { MOLTEN_GOLD } from "../effects/presets";
 import { ShaderStage } from "../effects/ShaderStage";
 import { ConceptButton } from "./ConceptButton";
-import { PlaceholderGallery, TestimonialPlaceholder } from "./PlaceholderGallery";
+import { PhotoGallery } from "./PhotoGallery";
 import { ScrollWords } from "./ScrollWords";
 import { SectionLabel } from "./SectionLabel";
 import { SplitWords } from "./SplitWords";
@@ -109,7 +109,7 @@ export function HomeD() {
         </div>
       </section>
 
-      <PlaceholderGallery concept="d" />
+      <PhotoGallery concept="d" />
 
       {/* Manifesto on a gold gradient band */}
       <section aria-labelledby="approach-heading" className="bg-noir-warm border-y border-c-line py-24 md:py-36">
@@ -124,8 +124,6 @@ export function HomeD() {
           />
         </div>
       </section>
-
-      <TestimonialPlaceholder concept="d" />
 
       {/* Leadership with a glowing orb */}
       <section aria-labelledby="leadership-heading" className="bg-noir-center relative overflow-hidden py-24 md:py-36">

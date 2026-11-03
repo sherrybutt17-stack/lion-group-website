@@ -1,8 +1,9 @@
 // Content for the two approved services. Service names are used exactly as the
 // client supplied them. Wording is adapted from the client's current website
-// (/health-care/ and /lion-group-agency/) and still needs approval; bracketed
-// text is a placeholder for content the client must supply. Claims that need
-// verification are kept out of this file and listed in docs/APPROVALS.md.
+// (/health-care/ and /lion-group-agency/) and still needs approval. Pages show
+// no placeholders: where details are unconfirmed, the copy stays neutral and
+// makes no claims. Claims that need verification are kept out of this file and
+// listed in docs/APPROVALS.md.
 
 export type ServiceSlug = "dodd-agency-provider" | "health-care-consultant";
 
@@ -98,22 +99,14 @@ export const doddAgencyProvider: ServiceContent = {
         "Individuals, families, guardians, counties, and organizations can contact us to ask whether this service fits their situation."
     },
     {
-      question: "Is The Lion Group a certified DODD provider?",
-      answer:
-        "[Client to supply verified certification details, or remove this question before publishing.]",
-      placeholder: true,
-    },
-    {
       question: "What area do you serve?",
       answer:
-        "[Client to confirm the service area. The Lion Group's office is in Cleveland, Ohio.]",
-      placeholder: true,
+        "Our office is at 1486 East 55th St in Cleveland, Ohio. Contact us to ask whether we can support you where you live."
     },
     {
       question: "Do you have shared living or respite housing available?",
       answer:
-        "[Client to confirm how housing availability is shared and how requests are handled.]",
-      placeholder: true,
+        "Contact The Lion Group to ask about current availability for shared living or respite housing."
     },
     {
       question: "How do I get started?",
@@ -144,9 +137,8 @@ export const healthCareConsultant: ServiceContent = {
   about: {
     paragraphs: [
       "The Lion Group partners with families, counties, and organizations to provide health care consulting.",
+      "Consulting starts from the individual's needs and goals, and brings together the people and providers involved so everyone works from the same plan.",
     ],
-    placeholder:
-      "[Client to supply: an approved description of the Health Care Consultant service, covering what it includes, what clients receive, and how engagements work.]"
   },
   audience: {
     intro: "This service is for:",
@@ -165,7 +157,6 @@ export const healthCareConsultant: ServiceContent = {
         text: "Coordinating the people and providers involved so everyone works from the same plan.",
       },
     ],
-    placeholder: "[Client to supply any additional areas this service covers.]"
   },
   faqs: [
     {
@@ -179,8 +170,8 @@ export const healthCareConsultant: ServiceContent = {
     },
     {
       question: "What does a consulting engagement look like?",
-      answer: "[Client to supply: how engagements start, what is delivered, and typical timelines.]",
-      placeholder: true,
+      answer:
+        "It starts with a conversation about your situation and goals. Contact The Lion Group to talk through what you need and how consulting could help."
     },
     {
       question: "How do I get started?",

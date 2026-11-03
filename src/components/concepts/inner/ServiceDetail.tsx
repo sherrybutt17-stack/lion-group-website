@@ -4,13 +4,33 @@ import { site } from "@/content/site";
 import { withConcept, type ConceptId } from "@/concepts/config";
 import { ConceptButton } from "../ConceptButton";
 import { ConceptPlaceholder } from "../ConceptPlaceholder";
-import { ImagePlaceholder } from "../ImagePlaceholder";
+import { GalleryPhoto, photoFrame, type PhotoSpec } from "../GalleryPhoto";
 import { SectionLabel } from "../SectionLabel";
 import { ConceptCta } from "./ConceptCta";
 import { ConceptFaq } from "./ConceptFaq";
 import { PageHero } from "./PageHero";
 import { h2Class } from "./styles";
 
+const wide = "(min-width: 1152px) 650px, (min-width: 768px) 58vw, 92vw";
+const narrow = "(min-width: 1152px) 430px, (min-width: 768px) 38vw, 92vw";
+const workingSession: PhotoSpec = {
+  name: "team-working-session",
+  alt: "Dr. Romey Coles Jr. reviewing work at a computer with a colleague",
+  sizes: wide,
+  focus: "object-[50%_30%]",
+};
+
+/** Two of the client's own photos per service page: [photo, column span on md+]. */
+const servicePhotos: Record<string, [PhotoSpec, string][]> = {
+  "dodd-agency-provider": [
+    [{ name: "ceo-presenting", alt: "Dr. Romey Coles Jr. speaking to an audience", sizes: narrow, focus: "object-[50%_22%]" }, "md:col-span-2"],
+    [workingSession, "md:col-span-3"],
+  ],
+  "health-care-consultant": [
+    [workingSession, "md:col-span-3"],
+    [{ name: "ceo-speaking", alt: "Dr. Romey Coles Jr. speaking with a tablet in hand", sizes: narrow, cutout: true }, "md:col-span-2"],
+  ],
+};
 
 export function ServiceDetail({ concept, service, index }: { concept: ConceptId; service: ServiceContent; index: number }) {
   const contactHref = withConcept(concept, `/contact-us/?service=${service.slug}`);
@@ -73,11 +93,12 @@ export function ServiceDetail({ concept, service, index }: { concept: ConceptId;
       </section>
 
       {/* Photography */}
-      <div className={`container-page ${concept === "b" ? "py-3" : "pb-6"}`} data-reveal>
-        <ImagePlaceholder
-          label={index === 0 ? "Real photo of a program, home, or team member at work." : "Real photo of a planning or consulting session."}
-          className="aspect-[4/3] rounded-[2rem] sm:aspect-[21/9]"
-        />
+      <div className={`container-page grid gap-4 md:grid-cols-5 ${concept === "b" ? "py-3" : "pb-6"}`} data-reveal-group>
+        {(servicePhotos[service.slug] ?? []).map(([photo, span]) => (
+          <div key={photo.name} className={`${concept === "a" || concept === "d" ? photoFrame : "group rounded-[1.75rem]"} ${span}`} data-reveal-item>
+            <GalleryPhoto {...photo} className="aspect-[4/3] md:aspect-auto md:h-[22rem] lg:h-[28rem]" />
+          </div>
+        ))}
       </div>
 
       {/* Offerings */}

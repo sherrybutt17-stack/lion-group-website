@@ -23,31 +23,16 @@ export const careers = {
   ],
   noGuarantee:
     "Submitting an application does not guarantee a response, an interview, or a job offer.",
-  openingsPlaceholder:
-    "[Client to supply current openings: title, employment type, location, and a short description for each.]",
   openingsFallback: "No positions are listed yet. You can still submit a general application.",
   privacy: [
     {
-      term: "Where your application goes",
-      detail:
-        "[Client to confirm the destination, such as a dedicated hiring inbox or an applicant tracking system.]",
-      placeholder: true,
-    },
-    {
       term: "Who reviews it",
-      detail: "[Client to confirm who at The Lion Group reviews applications.]",
-      placeholder: true,
-    },
-    {
-      term: "How long it's kept",
-      detail: "[Client to supply the retention period and how applications are deleted.]",
-      placeholder: true,
+      detail: "The Lion Group reviews every application it receives.",
     },
     {
       term: "What not to include",
       detail:
         "Please don't include your Social Security number, health information, or other sensitive personal details in this form.",
-      placeholder: false,
     },
   ],
   eeo: "The Lion Group is an Equal Opportunity Employer.",

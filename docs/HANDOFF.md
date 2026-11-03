@@ -10,7 +10,7 @@ A redesigned, responsive mockup that promotes only **DODD Agency Provider** and 
 - the gold rounded-shape motif
 - the CEO portraits
 
-Pages carry no approval badges or review tooling. Missing content appears as **placeholders**: bracketed copy slots, labelled "Image placeholder" frames (one slot in the homepage photo gallery, plus the service pages), and a client-story slot for a real, consented testimonial. Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
+Pages carry no approval badges, review tooling, or placeholders. Photo slots use the client's own photos only. Where details are unconfirmed, the copy stays neutral, or the item is left out (the certification FAQ, testimonials, open positions). Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
 
 ### Shortlist: A · Heritage and D · Gilded (black theme)
 The team shortlisted **A · Heritage** (`/a/`) and **D · Gilded** (`/d/`). Both now use a **black base with gold and warm-brown gradients in every section**, including the call-to-action bands, footer, inner pages, and dark-styled forms. The root page (`/`) is a chooser between the two. Concepts B, C, and E are switched off; their code is kept and can be re-enabled in `src/concepts/config.ts`. The baseline site and the review switcher were removed; both are preserved in commit `0970e13`.
@@ -61,8 +61,8 @@ A floating **Design** switcher (bottom-left, every page) jumps to the same page 
 |---|---|---|
 | `/` (and `/a/`, `/b/`, `/c/`) | Home | Draft hero headline, exactly two services, approach, leadership, Careers callout, contact CTA |
 | `/dodd-agency-provider/` | DODD Agency Provider | Exact service name; current-site wording as draft; supports flagged as an assumption; no provider-status claim |
-| `/health-care-consultant/` | Health Care Consultant | Exact service name; minimal draft plus placeholders; no clinical/direct-care claims |
-| `/careers/` | Careers / Job Application | Review → shortlist → client screens and hires; no guarantees; non-submitting form; privacy placeholders |
+| `/health-care-consultant/` | Health Care Consultant | Exact service name; minimal neutral draft; no clinical/direct-care claims |
+| `/careers/` | Careers / Job Application | Review → shortlist → client screens and hires; no guarantees; non-submitting form; minimal privacy notes |
 | `/about-us/` | About | Leadership bio with removed services stripped out; principles; both services |
 | `/contact-us/` | Contact | Contact details (to confirm); non-submitting form; `?service=` preselects the topic |
 | any other URL | 404 | Links to the homepage, both services, and contact |
@@ -94,7 +94,8 @@ src/components/               SiteHeader, NavList, MobileMenu, SiteFooter, Logo,
                               ContactDetails, Breadcrumbs, ReviewFlag (ReviewFlag/ReviewNote/Placeholder)
 src/components/forms/         Field, FormShell, useMockForm, CareersForm, ContactForm
 src/components/concepts/      HomeA/B/C, ConceptHeader/Footer/MobileMenu/Nav, ManeRays, SplitWords, ScrollWords,
-                              ServiceIndex, ConceptButton, ImagePlaceholder, ConceptPlaceholder, SectionLabel
+                              ServiceIndex, ConceptButton, GalleryPhoto, PhotoGallery, SectionLabel
+                              (ImagePlaceholder, ConceptPlaceholder: switched-off B/C only)
 src/components/concepts/inner PageHero, ServiceDetail, CareersDetail, AboutDetail, ContactDetail, ConceptFaq, ConceptCta
 src/components/concepts/motion ConceptMotion (motion director), Marquee
 src/components/effects/       ShaderStage (idle-loaded WebGL), MetallicLogo, MotionPause, motionPreference, presets
@@ -178,7 +179,7 @@ The single-run rows were measured just before the final font-preload change, whi
 - With JS, `useMockForm` validates on submit and shows an error summary that links to each field, plus inline errors (`aria-invalid`, `aria-describedby`). A valid submit only shows a `role="status"` message: "Mockup only: nothing was sent."
 - The resume field checks only the file's name, type, and size (PDF/DOC/DOCX, ≤5 MB). The file is never read or uploaded.
 - The careers fields are a minimized version of the client's PDF application. SSN, felony history, references, military service, and background-check consent were deliberately left out of the web form.
-- **To connect later:** replace the `onSubmit` in `useMockForm` with a POST to the approved destination (server-side endpoint, ATS, or WordPress/MetForm). Store resumes in private, access-controlled storage, add spam protection, and replace the placeholder privacy text. Keep secrets on the server, never in this frontend.
+- **To connect later:** replace the `onSubmit` in `useMockForm` with a POST to the approved destination (server-side endpoint, ATS, or WordPress/MetForm). Store resumes in private, access-controlled storage, add spam protection, and complete the privacy text (destination, retention). Keep secrets on the server, never in this frontend.
 
 ## Known limits
 - **Content is draft.** Service descriptions, FAQs, audiences, About bio, and Careers copy all need approval (see APPROVALS.md).
