@@ -1,6 +1,6 @@
 # Handoff: The Lion Group two-service website mockup
 
-**Status:** local mockup for client review. Not published; `noindex, nofollow`. Nothing will be published without the client's written approval and authorized production access.
+**Status:** design preview. The code is in a public GitHub repo, https://github.com/sherrybutt17-stack/lion-group-website, and the preview is deployed to GitHub Pages at https://sherrybutt17-stack.github.io/lion-group-website/. The preview is `noindex, nofollow` so search engines don't list unapproved copy. The production site (theliongroup.us) is untouched; launching there still needs the client's approval.
 
 ## What was built
 A redesigned, responsive mockup that promotes only **DODD Agency Provider** and **Health Care Consultant**, plus a Careers section. It reuses The Lion Group's existing brand:
@@ -10,10 +10,10 @@ A redesigned, responsive mockup that promotes only **DODD Agency Provider** and 
 - the gold rounded-shape motif
 - the CEO portraits
 
-Pages carry no approval badges. Missing content appears as **placeholders**: bracketed copy slots, and labelled "Image placeholder" frames where real photography will go. Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
+Pages carry no approval badges or review tooling. Missing content appears as **placeholders**: bracketed copy slots, labelled "Image placeholder" frames (including a photo gallery on both homepages), and a client-story slot for a real, consented testimonial. Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
 
 ### Shortlist: A · Heritage and D · Gilded (black theme)
-The team shortlisted **A · Heritage** (`/a/`) and **D · Gilded** (`/d/`). Both now use a **black base with gold and warm-brown gradients in every section**, including the call-to-action bands, footer, inner pages, and dark-styled forms. Concepts B, C, and E are switched off; their code is kept in the project and can be re-enabled in `src/concepts/config.ts`.
+The team shortlisted **A · Heritage** (`/a/`) and **D · Gilded** (`/d/`). Both now use a **black base with gold and warm-brown gradients in every section**, including the call-to-action bands, footer, inner pages, and dark-styled forms. The root page (`/`) is a chooser between the two. Concepts B, C, and E are switched off; their code is kept and can be re-enabled in `src/concepts/config.ts`. The baseline site and the review switcher were removed; both are preserved in commit `0970e13`.
 
 ### Five design concepts (history)
 The first build was clean but read as generic. The site now exists in five art directions, each a complete clickable site (all six pages) sharing the same content, with brand gradients and a signature WebGL effect:
@@ -85,7 +85,7 @@ package.json, next.config.ts, tsconfig.json, eslint.config.mjs, postcss.config.m
 assets/source/                original images downloaded from theliongroup.us (logo, favicons, CEO portraits)
 public/images/                generated AVIF/WebP (npm run images)
 src/app/                      layout.tsx (root), globals.css (brand + concept tokens, motion CSS), icons, not-found.tsx
-src/app/(baseline)/           baseline pages at the root URLs
+src/app/page.tsx              root design chooser (Heritage / Gilded)
 src/app/[concept]/            concept pages at /a/, /b/, /c/ (static params)
 src/concepts/config.ts        concept list and link helpers
 src/content/                  site.ts (nav, footer, contact facts), services.ts, careers.ts  ← all copy lives here
@@ -93,12 +93,10 @@ src/components/               SiteHeader, NavList, MobileMenu, SiteFooter, Logo,
                               ServiceCard, ServiceIcon, SectionHeading, Principles, Faq, CtaBand,
                               ContactDetails, Breadcrumbs, ReviewFlag (ReviewFlag/ReviewNote/Placeholder)
 src/components/forms/         Field, FormShell, useMockForm, CareersForm, ContactForm
-src/components/motion/        RevealObserver (baseline)
 src/components/concepts/      HomeA/B/C, ConceptHeader/Footer/MobileMenu/Nav, ManeRays, SplitWords, ScrollWords,
                               ServiceIndex, ConceptButton, ImagePlaceholder, ConceptPlaceholder, SectionLabel
 src/components/concepts/inner PageHero, ServiceDetail, CareersDetail, AboutDetail, ContactDetail, ConceptFaq, ConceptCta
 src/components/concepts/motion ConceptMotion (motion director), Marquee
-src/components/DesignSwitcher floating concept switcher (review tool)
 src/components/effects/       ShaderStage (idle-loaded WebGL), MetallicLogo, MotionPause, motionPreference, presets
 src/vendor/react-bits/        LightRays, Threads, Grainient, MoltenMetal, Topography, MetallicPaint (adapted)
 src/lib/images.generated.ts   image dimensions (generated)
@@ -114,7 +112,7 @@ npm run verify        # lint + typecheck + static build + removed-service/claim 
 npm run start         # serves out/ at http://localhost:4173
 npm run qa            # in a second terminal: browser QA (needs the server)
 npm run lighthouse    # in a second terminal: Lighthouse mobile + desktop (needs the server)
-NEXT_PUBLIC_REVIEW_FLAGS=on npm run build    # optional: show the old inline approval tags
+NEXT_PUBLIC_BASE_PATH=/lion-group-website npm run build   # build for GitHub Pages sub-path
 ```
 
 ## Validation results: final shortlist build (A + D, black theme)

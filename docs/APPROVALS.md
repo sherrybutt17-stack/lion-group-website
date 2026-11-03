@@ -6,9 +6,9 @@ Everything below must be confirmed by The Lion Group before the site is publishe
 - **Copy placeholders**, in [brackets] and styled as dashed boxes. Examples: the Health Care Consultant scope, FAQ answers about certification and service area, open positions, and the careers privacy wording.
 - **Image placeholders**, labelled "Image placeholder", marking where real photography goes. On the service pages and Concept B's homepage they mark photos of programs, homes, team members, and consulting sessions.
 
-All other copy on the pages is a draft adapted from the current website. It is listed below and still needs the client's sign-off. If ever needed, the old inline tags return with `NEXT_PUBLIC_REVIEW_FLAGS=on`.
+All other copy on the pages is a draft adapted from the current website. It is listed below and still needs the client's sign-off.
 
-**Design concepts.** Two shortlisted design directions are live: `/a/` Heritage and `/d/` Gilded, both black with gold gradients. The original baseline is at `/`. All four share the same copy, so every item below applies to all of them. Choosing a direction is itself an approval item (section 8).
+**Design concepts.** Two shortlisted design directions are live: `/a/` Heritage and `/d/` Gilded, both black with gold gradients. The root page lets you choose between them. Public preview: https://sherrybutt17-stack.github.io/lion-group-website/ (not indexed by search engines). All four share the same copy, so every item below applies to all of them. Choosing a direction is itself an approval item (section 8).
 
 ## 1. Services and scope
 
@@ -82,7 +82,7 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 - [ ] Choose the production path: host this static build, or rebuild the approved design in Elementor on the existing WordPress site.
 - [ ] Approve redirects for removed pages. Suggested: 301 to the homepage, or 410 Gone. Affected pages: `/real-estate/`, `/faith-fortune-club/`, `/business-life-development/`, `/learning-to-lead/`, `/extreme-relation/`, `/strategy-planning/`, `/business-counseling/`, `/media-stream/`, `/lion-group-agency/`, `/cart/`, `/checkout/`, `/dashboard/`, `/student-registration/`, `/instructor-registration/`, `/test-page/`. Also `/mental-wellness/` and `/life-coach/` (linked from the old footer).
 - [ ] Decide where `/health-care/` should redirect. Both old footer service links pointed there.
-- [ ] Remove `noindex`, the "mockup / design concept" footer line, and the floating design switcher at launch.
+- [ ] At launch, remove `noindex` and the form "preview only" notices once the forms are connected.
 - [ ] Authorize production access. Nothing will be published without your written approval.
 
 ## 8. Design direction
@@ -90,4 +90,5 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 - [ ] Choose between the shortlisted directions, **A · Heritage** (`/a/`) or **D · Gilded** (`/d/`), both black with gold gradients. Elements can be mixed, e.g. D's molten hero with A's services index. (B, C, and E were set aside on 2026-11-03.)
 - [ ] Approve the motion level. Every concept respects the visitor's "reduce motion" setting, works without JavaScript, and has a "Pause animation" button (bottom-right) that stops all ambient animation and is remembered.
 - [ ] Note that the animated backgrounds use the visitor's graphics hardware (WebGL). They load only after the page is ready, pause when off-screen, and fall back to a static gold gradient.
-- [ ] Supply real photography for the labelled image placeholders, or approve removing those frames.
+- [ ] Supply real photography for the labelled image placeholders (homepage gallery and service pages), or approve removing those frames.
+- [ ] Supply a real, consented testimonial for the "Client stories" slot, or approve removing it.

@@ -8,7 +8,7 @@ Project guidance for Claude Code. It holds the working rules and commands, follo
 - Promote only **DODD Agency Provider** and **Health Care Consultant**, using the exact names. Careers is a section, not a service.
 - The footer's **Useful Links** contains exactly those two links.
 - Never add unverified claims: certification, licensure, years, 24/7, outcomes, Medicaid/waiver, or response times. Never add fabricated testimonials, people, stats, or badges. Pending items go in `docs/APPROVALS.md`.
-- No approval badges on pages (user decision, 2026-11-03). Missing content shows as placeholders instead: bracketed copy slots (`Placeholder`, `ConceptPlaceholder`) and labelled photo frames (`ImagePlaceholder`). Never use stock photos. Approval status lives only in `docs/APPROVALS.md`. The `review` kinds in `src/content/*` stay as metadata, and `NEXT_PUBLIC_REVIEW_FLAGS=on` shows the old tags if ever needed.
+- No approval badges or review tooling on pages (user decision, 2026-11-03). Missing content shows as placeholders: bracketed copy slots (`ConceptPlaceholder`), labelled photo frames (`ImagePlaceholder`, `PlaceholderGallery`), and a testimonial slot (`TestimonialPlaceholder`). Never use stock photos or invented testimonials. Approval status lives only in `docs/APPROVALS.md`.
 - Motion must respect `prefers-reduced-motion`, keep all content visible without JS, never hide the H1/LCP element behind JS, and give any looping motion a pause control.
 - Forms stay non-submitting (`method="dialog"`, `useMockForm`) until the client confirms a destination. No secrets in frontend code.
 - Don't publish or deploy without client approval and authorized access.
@@ -20,24 +20,27 @@ Project guidance for Claude Code. It holds the working rules and commands, follo
 - `npm run start`: serve `out/` on http://localhost:4173 (uses `serve.json` for trailing slashes).
 - `npm run qa`: Playwright + axe at 320/375/768/1024/1440/640px, plus no-JS, motion, keyboard, and form checks. Needs `npm run start` running. Writes `reports/qa-summary.md` and screenshots.
 - `npm run lighthouse`: Lighthouse 13 mobile + desktop, 3 runs, median. Needs `npm run start` running. Writes `reports/lighthouse-summary.md`.
-- `NEXT_PUBLIC_REVIEW_FLAGS=on npm run build`: show the old approval tags (off by default).
+- `NEXT_PUBLIC_BASE_PATH=/lion-group-website npm run build`: a build for sub-path hosting. GitHub Pages builds this way in CI.
+
+### Repository and preview
+- GitHub (public): https://github.com/sherrybutt17-stack/lion-group-website. Push over SSH; `main` auto-deploys.
+- Preview (GitHub Pages, `noindex`): https://sherrybutt17-stack.github.io/lion-group-website/
+- Commit `0970e13` holds the full earlier state: the baseline site, concepts B/C/E, the design switcher, and the review tags.
 
 ### Design concepts (added 2026-11-03, expanded to five, shortlisted to A and D)
 **Current state:** the user kept **A · Heritage** and **D · Gilded** and asked for both to be black-themed with gradients everywhere. Only A and D are built (`active` in `src/concepts/config.ts`). B, C and E are switched off but their code is kept and can be re-enabled. A and D use a near-black base (`#0a0a0a`) with gold and warm-brown gradients: `.bg-noir*` classes, a page-wide gradient wash, and `.form-dark` for forms.
 
 The user asked for premium, gradient-rich, "wow factor" design in five variations, using the best GitHub frontend libraries. The same six pages render six ways:
-- **Baseline** (`/`): the original wireframe-level build, kept for comparison. Lives in `src/app/(baseline)/`.
+- **Root** (`/`): a chooser between the two designs (`src/app/page.tsx`). The baseline wireframe site was removed; it's in commit `0970e13`.
 - **A · Heritage** (`/a/`): dark brown and gold, editorial serif, a mane-ray motion graphic around the logo, a services index, a scroll-lit manifesto.
 - **B · Daylight** (`/b/`): warm light, bento hero, a pausable principles marquee, sticky split-scroll services, a drawn careers stepper.
 - **C · Momentum** (`/c/`): ink and bright gold, kinetic uppercase type, a pointer spotlight, stacked sticky service panels, a scroll progress line.
 - **D · Gilded** (`/d/`): a full-screen molten-gold WebGL hero, a liquid-metal lion logo, glass service panels with pointer edge-glow, a gold gradient band.
 - **E · Atelier** (`/e/`): printed editorial on paper, animated gold topographic contours, a halftone portrait reveal, a magazine spread, a classifieds-style careers box.
-- A floating `DesignSwitcher` (bottom-left, every page) jumps to the same page in each concept. It's a review tool, not part of the production site.
 - Once the client picks a concept, promote it to the root and delete the others.
 
 ### Where things live
 - Copy and facts: `src/content/site.ts` (nav, footer, contact), `src/content/services.ts`, `src/content/careers.ts`. Shared by the baseline and all concepts.
-- Baseline pages: `src/app/(baseline)/**`. Both service pages render `src/components/ServicePage.tsx`.
 - Concept routes: `src/app/[concept]/**` (static params a/b/c). Concept list and link helpers are in `src/concepts/config.ts`.
 - Concept UI: `src/components/concepts/`.
   - Homes: `HomeA` … `HomeE`.
@@ -57,7 +60,6 @@ The user asked for premium, gradient-rich, "wow factor" design in five variation
 - `effects/MotionPause.tsx` is the site-wide "Pause animation" control (WCAG 2.2.2), remembered in localStorage and restored by the boot script.
 - Motion:
   - Concepts: `src/components/concepts/motion/ConceptMotion.tsx` (data-attribute director: reveals, scroll-linked words, parallax, progress, stacked panels, SVG draw, magnetic/tilt/spotlight) and `Marquee.tsx`. Above-the-fold entrances are CSS keyframes, so they run before hydration.
-  - Baseline: `src/components/motion/RevealObserver.tsx`.
 - Handoff and approvals: `docs/HANDOFF.md`, `docs/APPROVALS.md`.
 
 ## Plan: The Lion Group — two-service redesign mockup
@@ -140,7 +142,7 @@ The live site (theliongroup.us) promotes many unrelated offers: Real Estate, Fai
   - layout pieces: `SiteHeader`, `MobileMenu` (client), `SiteFooter`, `Breadcrumbs`, `SectionHeading`
   - content pieces: `ServiceCard`, `ServicePage` (shared template for both service routes), `CtaBand`, `Faq`, `ContactDetails`
   - `Picture`: `<picture>` with AVIF/WebP sources and explicit width/height; `priority` sets eager loading plus `fetchpriority="high"`, otherwise `loading="lazy"`
-  - `ReviewFlag`: a visible dashed tag such as "Draft, pending client approval"; a global `NEXT_PUBLIC_REVIEW_FLAGS` toggle hides all flags after approval
+  - `ReviewFlag` (removed later at the user's request; see commit `0970e13`)
   - `forms/Field`, `forms/MockForm` (client), `forms/CareersForm`, `forms/ContactForm`
   - `motion/RevealObserver` (client, mounted once)
 - **Scripts:**
