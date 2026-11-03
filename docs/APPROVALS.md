@@ -4,7 +4,7 @@ Everything below must be confirmed by The Lion Group before the site is publishe
 
 **How pending items appear on the pages.** Pages no longer carry "pending approval" tags. Where content is missing, the site shows placeholders instead:
 - **Copy placeholders**, in [brackets] and styled as dashed boxes. Examples: the Health Care Consultant scope, FAQ answers about certification and service area, open positions, and the careers privacy wording.
-- **Image placeholders**, labelled "Image placeholder", marking where real photography goes. On the service pages and Concept B's homepage they mark photos of programs, homes, team members, and consulting sessions.
+- **Image placeholders**, labelled "Image placeholder", marking where real photography goes. They mark photos still needed: a home or shared living space (homepage gallery) and program or consulting photos (service pages). The other two gallery slots now show the client's own photos.
 
 All other copy on the pages is a draft adapted from the current website. It is listed below and still needs the client's sign-off.
 
@@ -53,7 +53,9 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 
 ## 4. Imagery and brand
 
-- [ ] Approve use of Dr. Coles's photos and their alt text. Three come from the current site: the portrait on the gold shape, the plain cutout portrait, and the speaking photo (used in Concept C).
+- [ ] Approve use of Dr. Coles's photos and their alt text. All come from the current site: the portrait on the gold shape (Concept A homepage), the plain cutout portrait (Concept D homepage), the smiling portrait on the gold circle (About page), the photo of him presenting with a headset microphone (homepage gallery), and the speaking photo (Concept C only).
+- [ ] Confirm the homepage gallery photo of Dr. Coles at a computer with a colleague: that it is him, and that the colleague agrees to appear on the website. Alt text: "Dr. Romey Coles Jr. reviewing work at a computer with a colleague".
+- [ ] The other images in the downloaded site folders were not used: stock photos (business meetings, wellness, training), removed-service images (real estate, live stream, strategy), testimonial avatars, and off-brand backgrounds. A second gold-shape portrait duplicates the one already used.
 - [ ] Supply a vector (SVG) version of the lion "L" logo. Only PNG files exist today.
 - [ ] Supply a higher-resolution portrait if available. The current file is 600px wide.
 - [ ] Supply an image for social sharing (Open Graph), or approve using the logo.
@@ -90,5 +92,5 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 - [ ] Choose between the shortlisted directions, **A · Heritage** (`/a/`) or **D · Gilded** (`/d/`), both black with gold gradients. Elements can be mixed, e.g. D's molten hero with A's services index. (B, C, and E were set aside on 2026-11-03.)
 - [ ] Approve the motion level. Every concept respects the visitor's "reduce motion" setting, works without JavaScript, and has a "Pause animation" button (bottom-right) that stops all ambient animation and is remembered.
 - [ ] Note that the animated backgrounds use the visitor's graphics hardware (WebGL). They load only after the page is ready, pause when off-screen, and fall back to a static gold gradient.
-- [ ] Supply real photography for the labelled image placeholders (homepage gallery and service pages), or approve removing those frames.
+- [ ] Supply real photography for the remaining labelled image placeholders (the home or shared living slot in the homepage gallery, and the service pages), or approve removing those frames.
 - [ ] Supply a real, consented testimonial for the "Client stories" slot, or approve removing it.

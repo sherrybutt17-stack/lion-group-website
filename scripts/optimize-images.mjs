@@ -15,6 +15,9 @@ const images = {
   "ceo-portrait-gold": { file: "ceo-portrait-gold.png", widths: [320, 480, 600] },
   "ceo-portrait-cutout": { file: "ceo-portrait-cutout.png", widths: [320, 500] },
   "ceo-speaking": { file: "ceo-speaking.png", widths: [320, 499] },
+  "ceo-portrait-smile": { file: "ceo-portrait-smile.png", widths: [320, 480, 600] },
+  "ceo-presenting": { file: "ceo-presenting.png", widths: [320, 504] },
+  "team-working-session": { file: "team-working-session.jpg", widths: [480, 720, 903] },
 };
 
 await mkdir(outDir, { recursive: true });

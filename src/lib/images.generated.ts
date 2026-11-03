@@ -36,6 +36,32 @@ export const imageManifest = {
       320,
       499
     ]
+  },
+  "ceo-portrait-smile": {
+    "width": 600,
+    "height": 506,
+    "widths": [
+      320,
+      480,
+      600
+    ]
+  },
+  "ceo-presenting": {
+    "width": 504,
+    "height": 677,
+    "widths": [
+      320,
+      504
+    ]
+  },
+  "team-working-session": {
+    "width": 903,
+    "height": 657,
+    "widths": [
+      480,
+      720,
+      903
+    ]
   }
 } as const;
 

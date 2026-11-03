@@ -8,3 +8,8 @@ reports/screens/
 .env*.local
 reports/lighthouse/
 reports/qa-summary.md
+
+# Raw image downloads from the live site (include stock and removed-service images; never commit).
+# Approved files are copied into assets/source/.
+/liongroup/
+/liongroup - faith group/

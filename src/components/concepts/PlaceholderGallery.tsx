@@ -1,11 +1,40 @@
 import type { ConceptId } from "@/concepts/config";
+import type { ImageName } from "@/lib/images.generated";
+import { Picture } from "../Picture";
 import { ConceptPlaceholder } from "./ConceptPlaceholder";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { SectionLabel } from "./SectionLabel";
 
-const frame = "border-gradient-gold rounded-[1.75rem] p-1.5 [--card-bg:#0a0a0a]";
+const frame = "group border-gradient-gold rounded-[1.75rem] p-1.5 [--card-bg:#0a0a0a]";
 
-/** Gallery of labelled photo slots for real, client-supplied photography (no stock). */
+interface GalleryPhotoProps {
+  name: ImageName;
+  alt: string;
+  sizes: string;
+  /** Tailwind object-position class that keeps the subject in frame when cropped. */
+  focus?: string;
+  className?: string;
+}
+
+/** A client photo cropped to fill its gallery frame. */
+function GalleryPhoto({ name, alt, sizes, focus = "object-center", className = "" }: GalleryPhotoProps) {
+  return (
+    <div className={`relative overflow-hidden rounded-[1.4rem] bg-c-surface ${className}`}>
+      <Picture
+        name={name}
+        alt={alt}
+        sizes={sizes}
+        className={`absolute inset-0 h-full w-full object-cover ${focus} motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:group-hover:scale-[1.03]`}
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/45 via-transparent to-transparent" />
+    </div>
+  );
+}
+
+/**
+ * Gallery of the client's own photography (no stock). Slots without a real
+ * photo yet stay as labelled placeholders.
+ */
 export function PlaceholderGallery({ concept }: { concept: ConceptId }) {
   const centered = concept === "d";
   return (
@@ -19,13 +48,25 @@ export function PlaceholderGallery({ concept }: { concept: ConceptId }) {
         </div>
         <div className="mt-14 grid gap-4 md:grid-cols-3 md:grid-rows-2" data-reveal-group>
           <div className={`${frame} md:col-span-2 md:row-span-2`} data-reveal-item>
-            <ImagePlaceholder label="Photo of a program, activity, or day at The Lion Group." className="aspect-[4/3] h-full rounded-[1.4rem] md:aspect-auto" />
+            <GalleryPhoto
+              name="team-working-session"
+              alt="Dr. Romey Coles Jr. reviewing work at a computer with a colleague"
+              sizes="(min-width: 1152px) 720px, (min-width: 768px) 64vw, 92vw"
+              focus="object-[50%_30%]"
+              className="aspect-[4/3] h-full md:aspect-auto"
+            />
+          </div>
+          <div className={frame} data-reveal-item>
+            <GalleryPhoto
+              name="ceo-presenting"
+              alt="Dr. Romey Coles Jr. speaking to an audience"
+              sizes="(min-width: 1152px) 360px, (min-width: 768px) 32vw, 92vw"
+              focus="object-[50%_22%]"
+              className="aspect-[4/3] h-full"
+            />
           </div>
           <div className={frame} data-reveal-item>
             <ImagePlaceholder label="Photo of a home or shared living space." className="aspect-[4/3] h-full rounded-[1.4rem]" />
-          </div>
-          <div className={frame} data-reveal-item>
-            <ImagePlaceholder label="Photo of the team at work." className="aspect-[4/3] h-full rounded-[1.4rem]" />
           </div>
         </div>
       </div>

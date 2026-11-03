@@ -34,7 +34,7 @@ export function AboutDetail({ concept }: { concept: ConceptId }) {
           <div className="container-page grid items-center gap-14 lg:grid-cols-12">
             <div className="mx-auto w-full max-w-md lg:col-span-5" data-reveal="clip">
               <Picture
-                name="ceo-portrait-gold"
+                name="ceo-portrait-smile"
                 alt="Dr. Romey Coles Jr., President and CEO of The Lion Group"
                 sizes="(min-width: 1024px) 420px, 80vw"
                 className="h-auto w-full"

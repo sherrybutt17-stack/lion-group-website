@@ -10,7 +10,7 @@ A redesigned, responsive mockup that promotes only **DODD Agency Provider** and 
 - the gold rounded-shape motif
 - the CEO portraits
 
-Pages carry no approval badges or review tooling. Missing content appears as **placeholders**: bracketed copy slots, labelled "Image placeholder" frames (including a photo gallery on both homepages), and a client-story slot for a real, consented testimonial. Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
+Pages carry no approval badges or review tooling. Missing content appears as **placeholders**: bracketed copy slots, labelled "Image placeholder" frames (one slot in the homepage photo gallery, plus the service pages), and a client-story slot for a real, consented testimonial. Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
 
 ### Shortlist: A · Heritage and D · Gilded (black theme)
 The team shortlisted **A · Heritage** (`/a/`) and **D · Gilded** (`/d/`). Both now use a **black base with gold and warm-brown gradients in every section**, including the call-to-action bands, footer, inner pages, and dark-styled forms. The root page (`/`) is a chooser between the two. Concepts B, C, and E are switched off; their code is kept and can be re-enabled in `src/concepts/config.ts`. The baseline site and the review switcher were removed; both are preserved in commit `0970e13`.
@@ -82,7 +82,7 @@ A floating **Design** switcher (bottom-left, every page) jumps to the same page 
 ```
 CLAUDE.md                     project rules, commands, approved plan
 package.json, next.config.ts, tsconfig.json, eslint.config.mjs, postcss.config.mjs
-assets/source/                original images downloaded from theliongroup.us (logo, favicons, CEO portraits)
+assets/source/                original images downloaded from theliongroup.us (logo, favicons, CEO portraits, gallery photos)
 public/images/                generated AVIF/WebP (npm run images)
 src/app/                      layout.tsx (root), globals.css (brand + concept tokens, motion CSS), icons, not-found.tsx
 src/app/page.tsx              root design chooser (Heritage / Gilded)
