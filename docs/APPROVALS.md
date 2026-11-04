@@ -8,7 +8,7 @@ Everything below must be confirmed by The Lion Group before the site is publishe
 
 All other copy on the pages is a draft adapted from the current website. It is listed below and still needs the client's sign-off.
 
-**Design concepts.** Two shortlisted design directions are on the public preview: `/a/` Heritage and `/d/` Gilded, both black with gold gradients. Public preview: https://sherrybutt17-stack.github.io/lion-group-website/ (not indexed by search engines). `/b/` Daylight, `/c/` Momentum and `/e/` Atelier are also available on branch `all-five-designs`, which is not on the preview yet. The root page lets you choose between the designs. All five share the same copy, so every item below applies to all of them. Choosing a direction is itself an approval item (section 8).
+**Design concepts.** Five design directions are on the public preview: `/a/` Heritage and `/d/` Gilded (shortlisted, both black with gold gradients), plus `/b/` Daylight, `/c/` Momentum and `/e/` Atelier. Public preview: https://sherrybutt17-stack.github.io/lion-group-website/ (not indexed by search engines). The root page lets you choose between them. All five share the same copy, so every item below applies to all of them. Choosing a direction is itself an approval item (section 8).
 
 ## 1. Services and scope
 
