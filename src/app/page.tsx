@@ -11,10 +11,13 @@ export const metadata: Metadata = {
 
 const previews: Record<string, { art: string; tagline: string }> = {
   a: { art: "bg-noir-hero", tagline: "Black and gold editorial, with gold light rays around the lion." },
+  b: { art: "bg-mesh-light", tagline: "Warm and welcoming, with a bento layout." },
+  c: { art: "bg-mesh-dark", tagline: "Bold and kinetic, with big type and stacked panels." },
   d: { art: "bg-mesh-molten", tagline: "Cinematic molten gold, with a liquid-metal lion." },
+  e: { art: "bg-[linear-gradient(160deg,#fbfbfb_55%,#fbf6e6)]", tagline: "Printed editorial, with paper, ink rules and gold topography." },
 };
 
-/** Entry page: choose one of the two website designs. */
+/** Entry page: choose one of the website designs. */
 export default function DesignChooser() {
   return (
     <div data-concept="a" className="min-h-svh">
@@ -28,12 +31,12 @@ export default function DesignChooser() {
             <h1 className="mt-4 font-serif text-[clamp(2.5rem,1.5rem+4vw,5rem)] leading-[1] tracking-[-0.025em] text-c-ink">
               Choose a <span className="text-gradient-gold">design</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-lg">Two directions for the new website. Each one is a complete site you can click through.</p>
+            <p className="mx-auto mt-5 max-w-xl text-lg">Five directions for the new website. Each one is a complete site you can click through.</p>
           </div>
 
-          <ul className="mx-auto mt-14 grid w-full max-w-5xl gap-6 md:grid-cols-2">
+          <ul className="mx-auto mt-14 flex w-full max-w-6xl flex-wrap justify-center gap-6">
             {concepts.map((c) => (
-              <li key={c.id}>
+              <li key={c.id} className="w-full md:w-[calc(50%-0.75rem)] xl:w-[calc(33.333%-1rem)]">
                 <Link
                   prefetch={false}
                   href={`/${c.id}/`}

@@ -71,8 +71,8 @@ const USEFUL_LINKS = [
   { label: "Health Care Consultant", href: "/health-care-consultant/" },
 ];
 const PRIMARY_NAV = ["/", "/dodd-agency-provider/", "/health-care-consultant/", "/careers/", "/about-us/", "/contact-us/"];
-// Design concepts render the same site under /a/, /b/ and /c/.
-const CONCEPTS = ["a", "d"]; // active concepts (see src/concepts/config.ts)
+// Design concepts render the same site under /a/ to /e/.
+const CONCEPTS = ["a", "b", "c", "d", "e"]; // active concepts (see src/concepts/config.ts)
 const withPrefix = (concept, href) => (concept ? (href === "/" ? `/${concept}/` : `/${concept}${href}`) : href);
 // The root is a design chooser; every site page lives under a concept prefix.
 const ROUTES = new Set(["/", ...CONCEPTS.flatMap((c) => PRIMARY_NAV.map((h) => withPrefix(c, h)))]);
@@ -146,7 +146,7 @@ for (const file of pages) {
   const rel = path.relative(root, file);
   const isChooser = rel === path.join("out", "index.html");
   // 404 pages use the Heritage header and footer.
-  const concept = rel.match(/^out\/([ad])\//)?.[1] ?? (/404|_not-found/.test(rel) ? "a" : undefined);
+  const concept = rel.match(/^out\/([a-e])\//)?.[1] ?? (/404|_not-found/.test(rel) ? "a" : undefined);
   const expectedUseful = USEFUL_LINKS.map((l) => ({ ...l, href: withPrefix(concept, l.href) }));
   const expectedNav = PRIMARY_NAV.map((h) => withPrefix(concept, h));
   scan(rel, html, SERVICE_TERMS);
@@ -193,5 +193,5 @@ if (problems.length) {
 console.log(
   `check:services passed: ${pages.length} pages and src/ contain no removed services or unverified claims; ` +
     "Useful Links = DODD Agency Provider + Health Care Consultant; primary nav = 6 approved items; all internal links resolve " +
-    "(baseline and concepts A and D).",
+    "(chooser and all five concepts).",
 );

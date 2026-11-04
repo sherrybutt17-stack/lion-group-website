@@ -604,14 +604,6 @@ html:has([data-concept]) {
   -webkit-text-stroke: 1px var(--c-line);
 }
 
-/* Designed placeholder frame for client-supplied photography. */
-.image-placeholder {
-  background-color: var(--c-surface);
-  background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgb(126 104 33 / 0.08) 14px 15px);
-  border: 1px dashed var(--c-line);
-}
-
-/* Spotlight that follows the pointer (CSS variables set by ConceptMotion). */
 [data-spotlight] {
   --mx: 70%;
   --my: 30%;
@@ -636,6 +628,15 @@ html:has([data-concept]) {
 
 .word-mask > span {
   display: inline-block;
+}
+
+/* Tight italic gradient headlines (Atelier): gradient text only paints inside
+   its own box, so give the box and the mask room for descenders and the slant
+   without changing the word spacing or line height. */
+.word-mask-loose .word-mask,
+.word-mask-loose .word-mask > span {
+  padding: 0 0.1em 0.26em 0;
+  margin: 0 -0.1em -0.26em 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

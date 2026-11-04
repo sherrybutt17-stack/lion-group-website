@@ -13,7 +13,7 @@ A redesigned, responsive mockup that promotes only **DODD Agency Provider** and 
 Pages carry no approval badges, review tooling, or placeholders. Photo slots use the client's own photos only. Where details are unconfirmed, the copy stays neutral, or the item is left out (the certification FAQ, testimonials, open positions). Everything awaiting sign-off is listed in [APPROVALS.md](APPROVALS.md). Unverified claims are kept off the pages entirely.
 
 ### Shortlist: A · Heritage and D · Gilded (black theme)
-The team shortlisted **A · Heritage** (`/a/`) and **D · Gilded** (`/d/`). Both now use a **black base with gold and warm-brown gradients in every section**, including the call-to-action bands, footer, inner pages, and dark-styled forms. The root page (`/`) is a chooser between the two. Concepts B, C, and E are switched off; their code is kept and can be re-enabled in `src/concepts/config.ts`. The baseline site and the review switcher were removed; both are preserved in commit `0970e13`.
+The team shortlisted **A · Heritage** (`/a/`) and **D · Gilded** (`/d/`). Both now use a **black base with gold and warm-brown gradients in every section**, including the call-to-action bands, footer, inner pages, and dark-styled forms. The root page (`/`) is a chooser. On 2026-11-04 concepts B, C, and E were switched back on for review (branch `all-five-designs`), so the chooser lists all five. Set `active` in `src/concepts/config.ts` to switch any of them off again. The baseline site and the review switcher were removed; both are preserved in commit `0970e13`.
 
 ### Five design concepts (history)
 The first build was clean but read as generic. The site now exists in five art directions, each a complete clickable site (all six pages) sharing the same content, with brand gradients and a signature WebGL effect:
@@ -95,7 +95,7 @@ src/components/               SiteHeader, NavList, MobileMenu, SiteFooter, Logo,
 src/components/forms/         Field, FormShell, useMockForm, CareersForm, ContactForm
 src/components/concepts/      HomeA/B/C, ConceptHeader/Footer/MobileMenu/Nav, ManeRays, SplitWords, ScrollWords,
                               ServiceIndex, ConceptButton, GalleryPhoto, PhotoGallery, SectionLabel
-                              (ImagePlaceholder, ConceptPlaceholder: switched-off B/C only)
+                              (ConceptPlaceholder: kept in code, no content uses it)
 src/components/concepts/inner PageHero, ServiceDetail, CareersDetail, AboutDetail, ContactDetail, ConceptFaq, ConceptCta
 src/components/concepts/motion ConceptMotion (motion director), Marquee
 src/components/effects/       ShaderStage (idle-loaded WebGL), MetallicLogo, MotionPause, motionPreference, presets
@@ -115,6 +115,13 @@ npm run qa            # in a second terminal: browser QA (needs the server)
 npm run lighthouse    # in a second terminal: Lighthouse mobile + desktop (needs the server)
 NEXT_PUBLIC_BASE_PATH=/lion-group-website npm run build   # build for GitHub Pages sub-path
 ```
+
+## Validation results: all five designs (branch `all-five-designs`, 2026-11-04)
+
+- `eslint`, `tsc`, `next build`, and `check:services` (34 pages) pass.
+- QA covers 32 routes × 6 widths (320/375/768/1024/1440 + 640 at 200% zoom), axe WCAG 2.2 AA, no-JS, reduced motion, keyboard, forms, and the WebGL pause. **0 failures.** axe lists color-contrast for manual review on every route because it can't measure gradient text.
+- Two small edits came after the full run: a shorter chooser caption and B's first service photo. `/` and `/b/` were re-checked at 375 and 1440px: 0 axe violations, no overflow, no console errors.
+- Lighthouse was not re-run for this build.
 
 ## Validation results: final shortlist build (A + D, black theme)
 

@@ -47,7 +47,7 @@ export function HomeE() {
 
           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-8">
-              <h1 id="hero-heading" className="font-serif text-[clamp(3rem,1rem+6.6vw,8rem)] leading-[0.9] tracking-[-0.04em] text-c-ink">
+              <h1 id="hero-heading" className="word-mask-loose font-serif text-[clamp(3rem,1rem+6.6vw,8rem)] leading-[0.9] tracking-[-0.04em] text-c-ink">
                 <SplitWords
                   segments={[
                     "Support for",

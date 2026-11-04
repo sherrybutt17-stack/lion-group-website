@@ -8,7 +8,7 @@ import { GOLD_GRAIN } from "../effects/presets";
 import { ShaderStage } from "../effects/ShaderStage";
 import { ConceptButton } from "./ConceptButton";
 import { ConceptPlaceholder } from "./ConceptPlaceholder";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { GalleryPhoto, type PhotoSpec } from "./GalleryPhoto";
 import { Marquee } from "./motion/Marquee";
 import { SectionLabel } from "./SectionLabel";
 import { SplitWords } from "./SplitWords";
@@ -16,6 +16,13 @@ import { SplitWords } from "./SplitWords";
 const href = (path: string) => withConcept("b", path);
 
 const tile = "relative overflow-hidden rounded-[2rem]";
+
+const photoSizes = "(min-width: 1152px) 640px, (min-width: 1024px) 56vw, 84vw";
+/** One of the client's own photos per service card, in `services` order (never stock). */
+const servicePhotos: PhotoSpec[] = [
+  { name: "ceo-speaking", alt: "Dr. Romey Coles Jr. speaking with a tablet in hand", sizes: photoSizes, cutout: true },
+  { name: "team-working-session", alt: "Dr. Romey Coles Jr. reviewing work at a computer with a colleague", sizes: photoSizes, focus: "object-[50%_30%]" },
+];
 
 function GoldCheck() {
   return (
@@ -175,10 +182,9 @@ export function HomeB() {
                 </ul>
                 {service.offerings.placeholder && <ConceptPlaceholder className="mt-6">{service.offerings.placeholder}</ConceptPlaceholder>}
 
-                <ImagePlaceholder
-                  label={i === 0 ? "Photo of a program, home, or team member at work." : "Photo of a planning or consulting session."}
-                  className="mt-10 aspect-[16/9] rounded-2xl"
-                />
+                <div className="group mt-10">
+                  <GalleryPhoto {...servicePhotos[i]} className="aspect-[16/9]" />
+                </div>
 
                 <div className="mt-10">
                   <ConceptButton href={href(service.href)}>Learn about {service.name}</ConceptButton>

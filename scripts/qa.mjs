@@ -9,8 +9,9 @@ import { AxeBuilder } from "@axe-core/playwright";
 const root = path.resolve(import.meta.dirname, "..");
 const BASE = process.env.QA_BASE_URL ?? "http://localhost:4173";
 const PAGES = ["/", "/dodd-agency-provider/", "/health-care-consultant/", "/careers/", "/about-us/", "/contact-us/"];
-// Design chooser at the root plus every page of the two designs (/a/, /d/).
-const SITE_ROUTES = ["/", ...["a", "d"].flatMap((c) => PAGES.map((p) => (p === "/" ? `/${c}/` : `/${c}${p}`)))];
+// Design chooser at the root plus every page of the five designs (/a/ to /e/).
+const CONCEPTS = ["a", "b", "c", "d", "e"];
+const SITE_ROUTES = ["/", ...CONCEPTS.flatMap((c) => PAGES.map((p) => (p === "/" ? `/${c}/` : `/${c}${p}`)))];
 const ROUTES = [...SITE_ROUTES, "/missing-page/"];
 const HIDDEN_CHECK = "[data-reveal], [data-reveal-item], [data-word]";
 const isHidden = (el) => {
@@ -100,7 +101,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
     await page.close();
   }
   const page = await context.newPage();
-  for (const route of ["/a/", "/d/"]) {
+  for (const route of CONCEPTS.map((c) => `/${c}/`)) {
     await page.goto(BASE + route);
     await page.locator("header summary", { hasText: "Menu" }).click();
     if (!(await page.locator("header details[open] nav[aria-label='Primary'] a", { hasText: "Careers" }).isVisible())) {
@@ -201,7 +202,7 @@ for (const width of [...WIDTHS, ZOOM_WIDTH]) {
   const closed = await m.evaluate(() => !document.querySelector("header details").open && document.activeElement?.tagName === "SUMMARY");
   if (!closed) fail("keyboard: Escape does not close the mobile menu and return focus");
 
-  for (const route of ["/a/", "/d/"]) {
+  for (const route of CONCEPTS.map((c) => `/${c}/`)) {
     await m.goto(BASE + route, { waitUntil: "networkidle" });
     await m.locator("header summary", { hasText: "Menu" }).focus();
     await m.keyboard.press("Enter");

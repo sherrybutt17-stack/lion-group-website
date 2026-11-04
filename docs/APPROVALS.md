@@ -8,7 +8,7 @@ Everything below must be confirmed by The Lion Group before the site is publishe
 
 All other copy on the pages is a draft adapted from the current website. It is listed below and still needs the client's sign-off.
 
-**Design concepts.** Two shortlisted design directions are live: `/a/` Heritage and `/d/` Gilded, both black with gold gradients. The root page lets you choose between them. Public preview: https://sherrybutt17-stack.github.io/lion-group-website/ (not indexed by search engines). All four share the same copy, so every item below applies to all of them. Choosing a direction is itself an approval item (section 8).
+**Design concepts.** Two shortlisted design directions are on the public preview: `/a/` Heritage and `/d/` Gilded, both black with gold gradients. Public preview: https://sherrybutt17-stack.github.io/lion-group-website/ (not indexed by search engines). `/b/` Daylight, `/c/` Momentum and `/e/` Atelier are also available on branch `all-five-designs`, which is not on the preview yet. The root page lets you choose between the designs. All five share the same copy, so every item below applies to all of them. Choosing a direction is itself an approval item (section 8).
 
 ## 1. Services and scope
 
@@ -92,7 +92,7 @@ Also note: the mockup does not mention Medicaid, waivers, government affiliation
 
 ## 8. Design direction
 
-- [ ] Choose between the shortlisted directions, **A · Heritage** (`/a/`) or **D · Gilded** (`/d/`), both black with gold gradients. Elements can be mixed, e.g. D's molten hero with A's services index. (B, C, and E were set aside on 2026-11-03.)
+- [ ] Choose between the shortlisted directions, **A · Heritage** (`/a/`) or **D · Gilded** (`/d/`), both black with gold gradients. Elements can be mixed, e.g. D's molten hero with A's services index. (B, C, and E were set aside on 2026-11-03 and brought back for review on 2026-11-04.)
 - [ ] Approve the motion level. Every concept respects the visitor's "reduce motion" setting, works without JavaScript, and has a "Pause animation" button (bottom-right) that stops all ambient animation and is remembered.
 - [ ] Note that the animated backgrounds use the visitor's graphics hardware (WebGL). They load only after the page is ready, pause when off-screen, and fall back to a static gold gradient.
 - [ ] Supply more real photography (programs, homes, the team) if you want more variety than the current photos of Dr. Coles.

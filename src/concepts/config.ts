@@ -1,8 +1,8 @@
 // Design directions for client review. Each active concept renders the full
-// site under its own prefix; the baseline wireframe stays at the root.
-// The user shortlisted A (Heritage) and D (Gilded) on 2026-11-03. B, C and E
-// are switched off but their code is kept so they can be restored by adding
-// them back to `concepts`.
+// site under its own prefix; the root is a chooser between them.
+// The user shortlisted A (Heritage) and D (Gilded) on 2026-11-03, then asked on
+// 2026-11-04 for all five to go back on GitHub. Remove an id from `active` to
+// switch a concept off; its code can stay.
 
 export type ConceptId = "a" | "b" | "c" | "d" | "e";
 
@@ -20,9 +20,9 @@ export const allConcepts: Concept[] = [
   { id: "e", name: "Atelier", summary: "Printed editorial. Paper, ink rules, animated gold topography and a halftone portrait." },
 ];
 
-const active: ConceptId[] = ["a", "d"];
+const active: ConceptId[] = ["a", "b", "c", "d", "e"];
 
-/** Concepts currently built and shown in the design switcher. */
+/** Concepts currently built and shown in the design chooser. */
 export const concepts = allConcepts.filter((c) => active.includes(c.id));
 
 export const isConceptId = (value: string): value is ConceptId => concepts.some((c) => c.id === value);

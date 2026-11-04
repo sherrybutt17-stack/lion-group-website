@@ -12,7 +12,7 @@ Project guidance for Claude Code. It holds the working rules and commands, follo
   - Photo slots use only the client's own photos (`GalleryPhoto`, `PhotoGallery`), reused where needed. Never use stock photos.
   - Where copy is unconfirmed, write neutral wording that makes no claims, or leave the item out. No bracketed slots.
   - No testimonial section until a real, consented testimonial exists. Never invent one.
-  - Approval status lives only in `docs/APPROVALS.md`. `ConceptPlaceholder` and `ImagePlaceholder` remain only in the switched-off concepts B and C.
+  - Approval status lives only in `docs/APPROVALS.md`. Nothing renders a placeholder any more: `ImagePlaceholder` is deleted, and no content feeds `ConceptPlaceholder`.
 - Motion must respect `prefers-reduced-motion`, keep all content visible without JS, never hide the H1/LCP element behind JS, and give any looping motion a pause control.
 - Forms stay non-submitting (`method="dialog"`, `useMockForm`) until the client confirms a destination. No secrets in frontend code.
 - Don't publish or deploy without client approval and authorized access.
@@ -31,11 +31,11 @@ Project guidance for Claude Code. It holds the working rules and commands, follo
 - Preview (GitHub Pages, `noindex`): https://sherrybutt17-stack.github.io/lion-group-website/
 - Commit `0970e13` holds the full earlier state: the baseline site, concepts B/C/E, the design switcher, and the review tags.
 
-### Design concepts (added 2026-11-03, expanded to five, shortlisted to A and D)
-**Current state:** the user kept **A · Heritage** and **D · Gilded** and asked for both to be black-themed with gradients everywhere. Only A and D are built (`active` in `src/concepts/config.ts`). B, C and E are switched off but their code is kept and can be re-enabled. A and D use a near-black base (`#0a0a0a`) with gold and warm-brown gradients: `.bg-noir*` classes, a page-wide gradient wash, and `.form-dark` for forms.
+### Design concepts (added 2026-11-03, expanded to five, shortlisted to A and D, all five back 2026-11-04)
+**Current state:** the user kept **A · Heritage** and **D · Gilded** and asked for both to be black-themed with gradients everywhere. A and D are still the shortlist. On 2026-11-04 the user asked for all five designs to go on GitHub, so all five are built (`active` in `src/concepts/config.ts`). That change lives on branch `all-five-designs`; merging it to `main` publishes all five to the public preview, so get approval first. B, C and E keep their original looks, not the black theme. A and D use a near-black base (`#0a0a0a`) with gold and warm-brown gradients: `.bg-noir*` classes, a page-wide gradient wash, and `.form-dark` for forms.
 
 The user asked for premium, gradient-rich, "wow factor" design in five variations, using the best GitHub frontend libraries. The same six pages render six ways:
-- **Root** (`/`): a chooser between the two designs (`src/app/page.tsx`). The baseline wireframe site was removed; it's in commit `0970e13`.
+- **Root** (`/`): a chooser between the five designs (`src/app/page.tsx`). The baseline wireframe site was removed; it's in commit `0970e13`.
 - **A · Heritage** (`/a/`): dark brown and gold, editorial serif, a mane-ray motion graphic around the logo, a services index, a scroll-lit manifesto.
 - **B · Daylight** (`/b/`): warm light, bento hero, a pausable principles marquee, sticky split-scroll services, a drawn careers stepper.
 - **C · Momentum** (`/c/`): ink and bright gold, kinetic uppercase type, a pointer spotlight, stacked sticky service panels, a scroll progress line.
